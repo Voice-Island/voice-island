@@ -11,18 +11,18 @@ struct DashboardView: View {
 
         var title: String {
             switch self {
-            case .status: return "État"
-            case .machine: return "Ton Mac"
-            case .test: return "Tester"
-            case .dictation: return "Dictée"
-            case .command: return "Commandes vocales"
-            case .assistant: return "Assistant vocal"
-            case .voice: return "Voix et émotions"
-            case .turn: return "Tour de parole"
-            case .llm: return "Modèle de langage"
-            case .tools: return "Outils"
-            case .myVoice: return "Ma voix"
-            case .appearance: return "Apparence"
+            case .status: return String(localized: "Status")
+            case .machine: return String(localized: "Your Mac")
+            case .test: return String(localized: "Test")
+            case .dictation: return String(localized: "Dictation")
+            case .command: return String(localized: "Voice commands")
+            case .assistant: return String(localized: "Voice assistant")
+            case .voice: return String(localized: "Voice and emotions")
+            case .turn: return String(localized: "Turn-taking")
+            case .llm: return String(localized: "Language model")
+            case .tools: return String(localized: "Tools")
+            case .myVoice: return String(localized: "My voice")
+            case .appearance: return String(localized: "Appearance")
             }
         }
 
@@ -45,10 +45,10 @@ struct DashboardView: View {
 
         static let groups: [(title: String?, pages: [Page])] = [
             (nil, [.status, .machine, .test]),
-            ("Dictée (⌥ N par défaut)", [.dictation]),
-            ("Commandes vocales, sans voix", [.command]),
-            ("Assistant vocal", [.assistant, .voice, .turn]),
-            ("Commun aux trois", [.llm, .tools, .myVoice, .appearance]),
+            (String(localized: "Dictation (⌥ N by default)"), [.dictation]),
+            (String(localized: "Voice commands (silent)"), [.command]),
+            (String(localized: "Voice assistant"), [.assistant, .voice, .turn]),
+            (String(localized: "Shared by all three"), [.llm, .tools, .myVoice, .appearance]),
         ]
     }
 
@@ -88,7 +88,7 @@ struct DashboardView: View {
 
     @ViewBuilder private var detail: some View {
         if let error = store.error, store.draft == nil, page != .status {
-            ContentUnavailableView("Réglages indisponibles", systemImage: "exclamationmark.triangle",
+            ContentUnavailableView("Settings unavailable", systemImage: "exclamationmark.triangle",
                                    description: Text(error))
         } else {
             switch page ?? .status {
@@ -118,15 +118,15 @@ struct DashboardView: View {
         let later = store.draft.flatMap { draft in store.saved.map { draft.nextConversationChanges(since: $0) } } ?? []
         return HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Modifications non enregistrées").font(.callout.weight(.semibold))
-                Text(later.isEmpty ? "Appliqué dès la prochaine réponse"
-                     : "À la prochaine conversation : " + later.joined(separator: ", "))
+                Text("Unsaved changes").font(.callout.weight(.semibold))
+                (later.isEmpty ? Text("Applies from the next reply")
+                     : Text("From the next conversation: \(later.joined(separator: ", "))"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
             Spacer()
-            Button("Annuler") { store.revert() }
-            Button("Enregistrer") { store.save() }
+            Button("Cancel") { store.revert() }
+            Button("Save") { store.save() }
                 .keyboardShortcut("s", modifiers: .command)
                 .buttonStyle(.borderedProminent)
         }
@@ -143,13 +143,16 @@ struct MachinePage: View {
 
     var body: some View {
         Form {
-            Section("Ce Mac") {
-                LabeledContent("Puce", value: info.chip + (info.gpuCores.map { ", GPU \($0) cœurs" } ?? ""))
-                LabeledContent("Mémoire", value: "\(info.memoryGB) Go")
-                LabeledContent("Mémoire utilisable par le GPU", value: String(format: "%.1f Go", info.gpuBudgetGB))
-                LabeledContent("Espace disque libre", value: String(format: "%.0f Go", info.freeDiskGB))
+            Section("This Mac") {
+                LabeledContent("Chip", value: info.gpuCores.map { String(localized: "\(info.chip), \($0)-core GPU") }
+                    ?? info.chip)
+                LabeledContent("Memory", value: String(localized: "\(info.memoryGB) GB"))
+                LabeledContent("Memory available to the GPU",
+                               value: String(localized: "\(info.gpuBudgetGB, format: .number.precision(.fractionLength(1))) GB"))
+                LabeledContent("Free disk space",
+                               value: String(localized: "\(info.freeDiskGB, format: .number.precision(.fractionLength(0))) GB"))
             }
-            Section("Ce qui tourne bien ici") {
+            Section("What runs well here") {
                 ForEach(info.verdicts) { verdict in
                     HStack(alignment: .firstTextBaseline) {
                         Image(systemName: verdict.level == .good ? "checkmark.circle.fill"
@@ -164,13 +167,13 @@ struct MachinePage: View {
             }
             if let pack = info.recommendedPack {
                 Section {
-                    LabeledContent("Pack « \(pack.title) »", value: String(format: "≈ %.0f Go à télécharger", pack.downloadGB))
+                    LabeledContent("\(pack.title) pack", value: String(
+                        localized: "≈ \(pack.downloadGB, format: .number.precision(.fractionLength(0))) GB to download"))
                     Text(pack.summary).font(.caption).foregroundStyle(.secondary)
                 } header: {
-                    Text("Recommandé pour ce Mac")
+                    Text("Recommended for this Mac")
                 } footer: {
-                    Text("Un seul modèle de langage sert aux commandes et à l'assistant : deux modèles chargés à la fois "
-                         + "prendraient deux fois plus de mémoire.")
+                    Text("One language model serves both commands and the assistant: two models loaded at once would take twice the memory.")
                 }
             }
         }
@@ -194,27 +197,28 @@ struct StatusPage: View {
                             Text(service.detail).font(.caption).foregroundStyle(.secondary)
                         }
                         Spacer()
-                        Text(service.isUp == nil ? "…" : (service.isUp! ? "En marche" : "Arrêté"))
+                        (service.isUp == nil ? Text(verbatim: "…") : (service.isUp! ? Text("Running") : Text("Stopped")))
                             .foregroundStyle(.secondary)
                     }
                 }
             } header: {
-                Text("Services locaux")
+                Text("Local services")
             } footer: {
-                Text(monitor.allUp ? "Tout tourne : ⌥ Espace pour parler." : "L'assistant a besoin des quatre premiers services.")
+                monitor.allUp ? Text("Everything is running: press ⌥ Space to talk.")
+                    : Text("The assistant needs the first four services.")
             }
             Section {
                 HStack {
                     Button {
                         monitor.startAll()
                     } label: {
-                        Label("Démarrer tout", systemImage: "play.fill")
+                        Label("Start all", systemImage: "play.fill")
                     }
                     .disabled(monitor.busy != nil)
                     Button {
                         monitor.stopAll()
                     } label: {
-                        Label("Tout arrêter", systemImage: "stop.fill")
+                        Label("Stop all", systemImage: "stop.fill")
                     }
                     .disabled(monitor.busy != nil)
                     if let busy = monitor.busy {
@@ -223,8 +227,8 @@ struct StatusPage: View {
                     }
                 }
                 HStack {
-                    Button("Ouvrir les journaux") { NSWorkspace.shared.open(Paths.logs) }
-                    Button("Interface web") { NSWorkspace.shared.open(URL(string: "http://localhost:3010")!) }
+                    Button("Open logs") { NSWorkspace.shared.open(Paths.logs) }
+                    Button("Web interface") { NSWorkspace.shared.open(URL(string: "http://localhost:3010")!) }
                 }
             }
         }
@@ -241,7 +245,7 @@ struct TestPage: View {
                 Button {
                     controller.toggle()
                 } label: {
-                    Label(controller.isActive ? "Arrêter" : "Parler à l'assistant",
+                    Label(controller.isActive ? String(localized: "Stop") : String(localized: "Talk to the assistant"),
                           systemImage: controller.isActive ? "stop.fill" : "mic.fill")
                         .frame(minWidth: 180)
                 }
@@ -251,7 +255,8 @@ struct TestPage: View {
                     Button {
                         controller.toggleMute()
                     } label: {
-                        Label(controller.micMuted ? "Rallumer le micro" : "Couper le micro",
+                        Label(controller.micMuted ? String(localized: "Unmute microphone")
+                              : String(localized: "Mute microphone"),
                               systemImage: controller.micMuted ? "mic.slash.fill" : "mic.fill")
                     }
                     .controlSize(.large)
@@ -261,7 +266,8 @@ struct TestPage: View {
                     Button {
                         controller.toggleVoiceReplies()
                     } label: {
-                        Label(controller.voiceReplies ? "Réponses en texte" : "Réponses à voix haute",
+                        Label(controller.voiceReplies ? String(localized: "Text replies")
+                              : String(localized: "Spoken replies"),
                               systemImage: controller.voiceReplies ? "speaker.slash.fill" : "speaker.wave.2.fill")
                     }
                     .controlSize(.large)
@@ -274,8 +280,8 @@ struct TestPage: View {
             if let session = controller.session {
                 SessionTranscript(session: session)
             } else {
-                ContentUnavailableView("Aucune conversation", systemImage: "waveform",
-                                       description: Text("Lance une conversation ici ou avec ⌥ Espace."))
+                ContentUnavailableView("No conversation", systemImage: "waveform",
+                                       description: Text("Start a conversation here or with ⌥ Space."))
             }
         }
         .padding(20)
@@ -288,9 +294,9 @@ struct MetricsLine: View {
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: "timer").foregroundStyle(.secondary)
-            Text("fin de tour \(Int(metrics.eouMs))")
+            Text("end of turn \(Int(metrics.eouMs))")
             Text("LLM \(Int(metrics.llmMs ?? 0))")
-            Text("voix \(Int(metrics.ttsMs))")
+            Text("voice \(Int(metrics.ttsMs))")
             Text("total \(Int(metrics.totalMs)) ms").bold()
         }
         .font(.callout.monospacedDigit())
@@ -346,37 +352,33 @@ struct DictationPage: View {
     var body: some View {
         Form {
             Section {
-                Picker("Déclencheur", selection: Binding(get: { dictation.wrappedValue.trigger ?? "shortcut" },
-                                                         set: { dictation.wrappedValue.trigger = $0 })) {
-                    Text("Raccourci ci-dessous").tag("shortcut")
-                    Text("Maintenir Fn seule").tag("fn")
+                Picker("Trigger", selection: Binding(get: { dictation.wrappedValue.trigger ?? "shortcut" },
+                                                     set: { dictation.wrappedValue.trigger = $0 })) {
+                    Text("Shortcut below").tag("shortcut")
+                    Text("Hold Fn alone").tag("fn")
                 }
                 if (dictation.wrappedValue.trigger ?? "shortcut") == "shortcut" {
-                    KeyboardShortcuts.Recorder("Dictée (maintenir) :", name: .dictate)
+                    KeyboardShortcuts.Recorder("Dictation (hold):", name: .dictate)
                 }
             } footer: {
-                Text((dictation.wrappedValue.trigger ?? "shortcut") == "fn"
-                     ? "Maintiens Fn, parle, relâche. Fn avec une autre touche (flèches, F1…) ou un appui bref annule. "
-                       + "Dans Réglages Système › Clavier, règle « Appuyer sur la touche 🌐 pour » sur « Ne rien "
-                       + "faire », et retire Fn des autres apps de dictée."
-                     : "Maintiens le raccourci, parle, relâche : le texte s'écrit là où se trouve le curseur, dans "
-                       + "n'importe quelle app, sans être envoyé.")
+                (dictation.wrappedValue.trigger ?? "shortcut") == "fn"
+                    ? Text("Hold Fn, speak, release. Fn with another key (arrows, F1…) or a short press cancels. In System Settings › Keyboard, set “Press 🌐 key to” to “Do Nothing”, and remove Fn from other dictation apps.")
+                    : Text("Hold the shortcut, speak, release: the text is typed wherever the cursor is, in any app, without being sent.")
             }
-            Section("Reconnaissance") {
-                Picker("Moteur", selection: Binding(get: { dictation.wrappedValue.engine ?? "parakeet" },
+            Section("Recognition") {
+                Picker("Engine", selection: Binding(get: { dictation.wrappedValue.engine ?? "parakeet" },
                                                     set: { dictation.wrappedValue.engine = $0 })) {
-                    Text("Parakeet v3 (local, open source, 25 langues)").tag("parakeet")
-                    Text("Apple (demande la Dictée de macOS)").tag("apple")
+                    Text("Parakeet v3 (local, open source, 25 languages)").tag("parakeet")
+                    Text("Apple (requires macOS Dictation)").tag("apple")
                 }
-                Picker("Langue", selection: dictation.language) {
-                    Text("Langue du Mac").tag("auto")
-                    Text("Français").tag("fr-FR")
-                    Text("English").tag("en-US")
-                    Text("Deutsch (Schweiz)").tag("de-CH")
+                Picker("Language", selection: dictation.language) {
+                    Text("Mac language").tag("auto")
+                    Text(verbatim: "Français").tag("fr-FR")
+                    Text(verbatim: "English").tag("en-US")
+                    Text(verbatim: "Deutsch (Schweiz)").tag("de-CH")
                 }
-                Toggle("Retirer aussi les hésitations (LLM, plus lent)", isOn: dictation.cleanup)
-                Text("Parakeet devine la langue tout seul ; la langue choisie sert au moteur Apple et au repli Whisper "
-                     + "quand Parakeet se trompe d'alphabet.")
+                Toggle("Also remove filler words (LLM, slower)", isOn: dictation.cleanup)
+                Text("Parakeet detects the language on its own; the chosen language is used by the Apple engine and by the Whisper fallback when Parakeet gets the alphabet wrong.")
                     .font(.caption).foregroundStyle(.secondary)
             }
             VoiceIDSection(settings: $settings, product: .dictation)
@@ -392,27 +394,24 @@ struct CommandPage: View {
     var body: some View {
         Form {
             Section {
-                KeyboardShortcuts.Recorder("Commandes sans voix :", name: .commandMode)
-                KeyboardShortcuts.Recorder("Écrire (chat) :", name: .chatMode)
+                KeyboardShortcuts.Recorder("Silent commands:", name: .commandMode)
+                KeyboardShortcuts.Recorder("Type (chat):", name: .chatMode)
             } footer: {
-                Text("Une fois pour ouvrir, une deuxième fois pour fermer. Pendant une conversation vocale, le même "
-                     + "raccourci coupe ou rallume la voix des réponses sans perdre le fil.")
+                Text("Press once to open, again to close. During a voice conversation, the same shortcut turns spoken replies off or on without losing the thread.")
             }
             Section("Transcription") {
-                Picker("Moteur", selection: Binding(get: { settings.stt.commandEngine ?? "parakeet" },
+                Picker("Engine", selection: Binding(get: { settings.stt.commandEngine ?? "parakeet" },
                                                     set: { settings.stt.commandEngine = $0 })) {
                     ForEach(Choices.sttEngines, id: \.0) { Text($0.1).tag($0.0) }
                 }
-                Text("Parakeet comprend le français, l'anglais et l'allemand ; il transcrit la phrase entière après le "
-                     + "silence. Moonshine n'entend que l'anglais, mais affiche le texte en direct.")
+                Text("Parakeet understands French, English and German; it transcribes the whole sentence after the silence. Moonshine only hears English, but shows the text live.")
                     .font(.caption).foregroundStyle(.secondary)
             }
             Section {
-                Toggle("Commandes instantanées, sans le modèle", isOn: Binding(
+                Toggle("Instant commands, without the model", isOn: Binding(
                     get: { settings.tools.instantCommands ?? true }, set: { settings.tools.instantCommands = $0 }))
             } footer: {
-                Text("Ouvrir, fermer, placer une fenêtre (« Chrome à gauche »), pause, recherche : exécuté en ~0,1 s, "
-                     + "aussi en français. Le reste passe par le modèle de langage.")
+                Text("Open, close, place a window (“Chrome on the left”), pause, search: done in ~0.1 s, in English or French. Everything else goes through the language model.")
             }
             VoiceIDSection(settings: $settings, product: .command)
         }
@@ -427,28 +426,27 @@ struct AssistantPage: View {
     var body: some View {
         Form {
             Section {
-                KeyboardShortcuts.Recorder("Parler à l'assistant :", name: .toggleAssistant)
-                KeyboardShortcuts.Recorder("Couper / rallumer le micro :", name: .toggleMute)
+                KeyboardShortcuts.Recorder("Talk to the assistant:", name: .toggleAssistant)
+                KeyboardShortcuts.Recorder("Mute / unmute microphone:", name: .toggleMute)
             } footer: {
-                Text("Une fois pour ouvrir, une deuxième fois pour fermer.")
+                Text("Press once to open, again to close.")
             }
             Section("Transcription") {
-                Picker("Moteur", selection: Binding(get: { settings.stt.engine ?? "moonshine" },
+                Picker("Engine", selection: Binding(get: { settings.stt.engine ?? "moonshine" },
                                                     set: { settings.stt.engine = $0 })) {
                     ForEach(Choices.sttEngines, id: \.0) { Text($0.1).tag($0.0) }
                 }
                 if (settings.stt.engine ?? "moonshine") == "moonshine" {
-                    Picker("Modèle Moonshine", selection: $settings.stt.model) {
+                    Picker("Moonshine model", selection: $settings.stt.model) {
                         ForEach(Choices.sttModels, id: \.0) { Text($0.1).tag($0.0) }
                     }
-                    Toggle("Transcription en direct", isOn: $settings.stt.streaming)
-                    SliderRow("Silence de fin de phrase", value: $settings.stt.vadWindow, in: 0.1...1, step: 0.05,
-                              format: "%.2f s", help: "Plus court = plus rapide, risque de couper.")
-                    SliderRow("Intervalle de mise à jour", value: $settings.stt.updateInterval, in: 0.1...1, step: 0.05,
+                    Toggle("Live transcription", isOn: $settings.stt.streaming)
+                    SliderRow("End-of-sentence silence", value: $settings.stt.vadWindow, in: 0.1...1, step: 0.05,
+                              format: "%.2f s", help: "Shorter = faster, but it may cut you off.")
+                    SliderRow("Update interval", value: $settings.stt.updateInterval, in: 0.1...1, step: 0.05,
                               format: "%.2f s")
                 } else {
-                    Text("Parakeet : français, anglais, allemand ; phrase entière transcrite après le silence, fin de "
-                         + "tour décidée par le silence.")
+                    Text("Parakeet: French, English, German; the whole sentence is transcribed after the silence, and the silence decides the end of turn.")
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
@@ -457,9 +455,9 @@ struct AssistantPage: View {
                     .font(.body)
                     .frame(minHeight: 160)
             } header: {
-                Text("Instructions données au modèle")
+                Text("Instructions for the model")
             } footer: {
-                Text("Appliqué dès la prochaine réponse. Le mode d'emploi des outils est ajouté automatiquement.")
+                Text("Applies from the next reply. Instructions for the tools are added automatically.")
             }
             VoiceIDSection(settings: $settings, product: .assistant)
         }
@@ -474,21 +472,21 @@ struct LLMPage: View {
     var body: some View {
         Form {
             Section {
-                Picker("Modèle", selection: $settings.llm.model) {
+                Picker("Model", selection: $settings.llm.model) {
                     ForEach(Choices.llmModels, id: \.0) { Text($0.1).tag($0.0) }
                     if !Choices.llmModels.contains(where: { $0.0 == settings.llm.model }) {
                         Text(settings.llm.model).tag(settings.llm.model)
                     }
                 }
-                SliderRow("Température", value: $settings.llm.temperature, in: 0...2, step: 0.05,
-                          help: "0 = toujours la même réponse ; plus haut = plus varié.")
+                SliderRow("Temperature", value: $settings.llm.temperature, in: 0...2, step: 0.05,
+                          help: "0 = always the same reply; higher = more varied.")
                 SliderRow("Top-p", value: $settings.llm.topP, in: 0.05...1, step: 0.05)
-                SliderRow("Longueur max", value: $settings.llm.maxTokens, in: 16...512, step: 8, format: "%.0f tokens")
-                SliderRow("Mémoire", value: $settings.llm.memoryTurns, in: 1...30, step: 1, format: "%.0f échanges",
-                          help: "Questions et réponses précédentes gardées par le modèle.")
+                SliderRow("Max length", value: $settings.llm.maxTokens, in: 16...512, step: 8, format: "%.0f tokens")
+                SliderRow("Memory", value: $settings.llm.memoryTurns, in: 1...30, step: 1,
+                          format: String(localized: "%.0f exchanges"),
+                          help: "Previous questions and answers the model keeps.")
             } footer: {
-                Text("Un seul modèle pour les commandes vocales et l'assistant : en changer recharge le modèle et vide "
-                     + "son cache (la première réponse est plus lente).")
+                Text("One model for voice commands and the assistant: changing it reloads the model and clears its cache (the first reply is slower).")
             }
         }
         .formStyle(.grouped)
@@ -500,20 +498,20 @@ struct VoicePage: View {
 
     var body: some View {
         Form {
-            Section("Voix") {
-                Picker("Moteur", selection: $settings.tts.engine) {
+            Section("Voice") {
+                Picker("Engine", selection: $settings.tts.engine) {
                     ForEach(Choices.ttsEngines, id: \.0) { Text($0.1).tag($0.0) }
                 }
                 if settings.tts.engine.hasPrefix("qwen3") {
-                    Picker("Voix Qwen", selection: $settings.tts.qwenSpeaker) {
+                    Picker("Qwen voice", selection: $settings.tts.qwenSpeaker) {
                         ForEach(Choices.qwenSpeakers, id: \.self) { Text($0).tag($0) }
                     }
                 }
                 if settings.tts.engine == "kokoro" {
-                    Picker("Voix Kokoro", selection: $settings.tts.kokoroVoice) {
+                    Picker("Kokoro voice", selection: $settings.tts.kokoroVoice) {
                         ForEach(Choices.kokoroVoices, id: \.self) { Text(Choices.voiceLabel($0)).tag($0) }
                     }
-                    SliderRow("Vitesse", value: $settings.tts.speed, in: 0.5...2, step: 0.05, format: "×%.2f")
+                    SliderRow("Speed", value: $settings.tts.speed, in: 0.5...2, step: 0.05, format: "×%.2f")
                 }
             }
             Section {
@@ -522,7 +520,7 @@ struct VoicePage: View {
                 }
                 .pickerStyle(.segmented)
                 if settings.emotion.mode == "fixed" {
-                    TextField("Style de voix (en anglais)", text: $settings.emotion.fixedStyle)
+                    TextField("Voice style (in English)", text: $settings.emotion.fixedStyle)
                     HStack {
                         ForEach(Choices.fixedStyles, id: \.self) { style in
                             Button(style) { settings.emotion.fixedStyle = style }
@@ -535,12 +533,12 @@ struct VoicePage: View {
                     TextEditor(text: $settings.emotion.instructions)
                         .font(.callout)
                         .frame(minHeight: 140)
-                    Toggle("Sons non verbaux (rire, soupir)", isOn: $settings.emotion.sounds)
+                    Toggle("Non-verbal sounds (laugh, sigh)", isOn: $settings.emotion.sounds)
                 }
             } header: {
-                Text("Émotions")
+                Text("Emotions")
             } footer: {
-                Text("Seuls les moteurs Qwen3-TTS jouent une émotion. Automatique : le LLM écrit un ton avant chaque phrase.")
+                Text("Only the Qwen3-TTS engines can express emotion. Automatic: the LLM writes a tone before each sentence.")
             }
         }
         .formStyle(.grouped)
@@ -554,24 +552,24 @@ struct TurnPage: View {
         Form {
             Section {
                 Toggle(isOn: $settings.turn.turnDetector) {
-                    Text("Détecteur de fin de tour (anglais)")
-                    Text("Modèle de LiveKit sous LiveKit Model License, pas open source : à activer soi-même. Désactivé, le silence décide.")
+                    Text("End-of-turn detector (English)")
+                    Text("LiveKit model under the LiveKit Model License, not open source: turn it on yourself. When off, silence decides.")
                 }
-                SliderRow("Seuil du VAD", value: $settings.turn.vadThreshold, in: 0.1...0.9, step: 0.05,
-                          help: "Plus haut = ignore les bruits ; trop haut = coupe les voix douces.")
-                SliderRow("Silence minimal", value: $settings.turn.minSilence, in: 0.1...1.5, step: 0.05, format: "%.2f s")
-                SliderRow("Attente min après la phrase", value: $settings.turn.minEndpointingDelay, in: 0...2,
+                SliderRow("VAD threshold", value: $settings.turn.vadThreshold, in: 0.1...0.9, step: 0.05,
+                          help: "Higher = ignores noise; too high = cuts off soft voices.")
+                SliderRow("Minimum silence", value: $settings.turn.minSilence, in: 0.1...1.5, step: 0.05, format: "%.2f s")
+                SliderRow("Min wait after the sentence", value: $settings.turn.minEndpointingDelay, in: 0...2,
                           step: 0.05, format: "%.2f s")
-                SliderRow("Attente max après la phrase", value: $settings.turn.maxEndpointingDelay, in: 0.5...6,
+                SliderRow("Max wait after the sentence", value: $settings.turn.maxEndpointingDelay, in: 0.5...6,
                           step: 0.1, format: "%.1f s")
             } header: {
-                Text("Fin de tour")
+                Text("End of turn")
             }
             Section("Interruption") {
-                Toggle("Me laisser l'interrompre", isOn: $settings.turn.allowInterruptions)
-                SliderRow("Durée min pour interrompre", value: $settings.turn.minInterruptionDuration, in: 0.1...2,
+                Toggle("Let me interrupt it", isOn: $settings.turn.allowInterruptions)
+                SliderRow("Min duration to interrupt", value: $settings.turn.minInterruptionDuration, in: 0.1...2,
                           step: 0.05, format: "%.2f s")
-                SliderRow("Mots min pour interrompre", value: $settings.turn.minInterruptionWords, in: 0...6, step: 1,
+                SliderRow("Min words to interrupt", value: $settings.turn.minInterruptionWords, in: 0...6, step: 1,
                           format: "%.0f")
             }
         }
@@ -597,12 +595,12 @@ struct ToolsPage: View {
                     }
                 }
                 Toggle(isOn: $settings.tools.screenContext) {
-                    Label("Savoir ce qui est ouvert à l'écran", systemImage: "eye")
+                    Label("Know what's open on screen", systemImage: "eye")
                 }
             } header: {
-                Text("Actions sur le Mac")
+                Text("Actions on the Mac")
             } footer: {
-                Text("Exemples : « open Chrome », « what apps are open », « search YouTube for lo-fi on my personal account ». Le contexte écran ajoute une ligne par question (app au premier plan, apps ouvertes), sans capture d'écran.")
+                Text("Examples: “open Chrome”, “what apps are open”, “search YouTube for lo-fi on my personal account”. Screen context adds one line per question (frontmost app, open apps), without a screenshot.")
             }
 
             Section {
@@ -613,28 +611,28 @@ struct ToolsPage: View {
                             Text("Chrome · \(profile.dir)").font(.caption).foregroundStyle(.secondary)
                         }
                         Spacer()
-                        TextField("étiquette", text: accountLabel(for: profile.dir))
+                        TextField("label", text: accountLabel(for: profile.dir))
                             .frame(width: 150)
                             .textFieldStyle(.roundedBorder)
                     }
                 }
             } header: {
-                Text("Comptes Google")
+                Text("Google accounts")
             } footer: {
-                Text("Donne une étiquette au compte que tu nommes à l'oral (« personal », « work »). Sans étiquette, « personal » = profil Default.")
+                Text("Give a label to each account you name out loud (“personal”, “work”). Without a label, “personal” = the Default profile.")
             }
 
             Section {
-                TextField("Dossier du projet", text: $settings.tools.claudeCode.projectDir)
-                Picker("Droits", selection: $settings.tools.claudeCode.permissionMode) {
+                TextField("Project folder", text: $settings.tools.claudeCode.projectDir)
+                Picker("Permissions", selection: $settings.tools.claudeCode.permissionMode) {
                     ForEach(Choices.permissionModes, id: \.0) { Text($0.1).tag($0.0) }
                 }
-                SliderRow("Durée max", value: $settings.tools.claudeCode.timeoutMinutes, in: 1...60, step: 1,
+                SliderRow("Max duration", value: $settings.tools.claudeCode.timeoutMinutes, in: 1...60, step: 1,
                           format: "%.0f min")
             } header: {
                 Text("Claude Code")
             } footer: {
-                Text("L'assistant transmet la tâche à Claude Code en arrière-plan puis annonce le résultat. Claude Code utilise le cloud d'Anthropic. Rapports complets : web/logs/claude_code.log.")
+                Text("The assistant hands the task to Claude Code in the background, then announces the result. Claude Code uses Anthropic's cloud. Full reports: web/logs/claude_code.log.")
             }
 
             ClaudeSessionsSection()
@@ -647,14 +645,15 @@ struct ToolsPage: View {
                     }
                 }
                 Button {
-                    settings.tools.mcpServers.append(VoiceSettings.MCPServer(name: "nouveau serveur", url: "http://"))
+                    settings.tools.mcpServers.append(VoiceSettings.MCPServer(name: String(localized: "new server"),
+                                                                             url: "http://"))
                 } label: {
-                    Label("Ajouter un serveur MCP", systemImage: "plus")
+                    Label("Add an MCP server", systemImage: "plus")
                 }
             } header: {
-                Text("Mes outils MCP")
+                Text("My MCP tools")
             } footer: {
-                Text("Adresse HTTP (http://…/mcp) ou commande locale (ex. npx -y @modelcontextprotocol/server-filesystem ~/Documents). Limite les outils autorisés : un petit modèle se perd avec une longue liste. Pris en compte à la prochaine conversation.")
+                Text("HTTP address (http://…/mcp) or local command (e.g. npx -y @modelcontextprotocol/server-filesystem ~/Documents). Limit the allowed tools: a small model gets lost in a long list. Applies from the next conversation.")
             }
         }
         .formStyle(.grouped)
@@ -683,7 +682,7 @@ struct MCPServerRow: View {
             HStack {
                 Toggle("", isOn: Binding(get: { server.enabled ?? true }, set: { server.enabled = $0 }))
                     .labelsHidden()
-                TextField("Nom", text: $server.name)
+                TextField("Name", text: $server.name)
                 Picker("", selection: Binding(
                     get: { isCommand },
                     set: { command in
@@ -698,7 +697,7 @@ struct MCPServerRow: View {
                     }
                 )) {
                     Text("HTTP").tag(false)
-                    Text("Commande").tag(true)
+                    Text("Command").tag(true)
                 }
                 .labelsHidden()
                 .frame(width: 130)
@@ -706,7 +705,7 @@ struct MCPServerRow: View {
                     .buttonStyle(.borderless)
             }
             if isCommand {
-                TextField("Commande et arguments", text: Binding(
+                TextField("Command and arguments", text: Binding(
                     get: { ([server.command ?? ""] + (server.args ?? [])).joined(separator: " ") },
                     set: { line in
                         let parts = line.split(separator: " ").map(String.init)
@@ -714,9 +713,9 @@ struct MCPServerRow: View {
                         server.args = Array(parts.dropFirst())
                     }))
             } else {
-                TextField("Adresse", text: Binding(get: { server.url ?? "" }, set: { server.url = $0 }))
+                TextField("Address", text: Binding(get: { server.url ?? "" }, set: { server.url = $0 }))
             }
-            TextField("Outils autorisés (séparés par des virgules, vide = tous)", text: Binding(
+            TextField("Allowed tools (comma-separated, empty = all)", text: Binding(
                 get: { (server.allowedTools ?? []).joined(separator: ", ") },
                 set: { line in
                     let tools = line.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
@@ -737,42 +736,58 @@ struct AppearancePage: View {
         Form {
             if let settings {
                 Section {
-                    Picker("Position du cadre", selection: Binding(
+                    Picker("Island position", selection: Binding(
                         get: { settings.wrappedValue.ui.islandPosition ?? "notch" },
                         set: { settings.wrappedValue.ui.islandPosition = $0 }
                     )) {
-                        Text("En haut au centre, sous la caméra").tag("notch")
-                        Text("En haut à gauche").tag("top_left")
+                        Text("Top center, below the camera").tag("notch")
+                        Text("Top left").tag("top_left")
                     }
-                    Toggle("Petit son quand une action est faite", isOn: Binding(
+                    Toggle("Short sound when an action is done", isOn: Binding(
                         get: { settings.wrappedValue.ui.actionSounds ?? true },
                         set: { settings.wrappedValue.ui.actionSounds = $0 }
                     ))
                 } footer: {
-                    Text("Pris en compte à la prochaine ouverture du cadre.")
+                    Text("Applies the next time the island opens.")
                 }
             }
             Section {
-                KeyboardShortcuts.Recorder("Ouvrir le tableau de bord :", name: .openDashboard)
+                KeyboardShortcuts.Recorder("Open the dashboard:", name: .openDashboard)
             } footer: {
-                Text("Les raccourcis de chaque produit sont sur sa page : Dictée, Commandes vocales, Assistant vocal.")
+                Text("Each product's shortcuts are on its own page: Dictation, Voice commands, Voice assistant.")
             }
         }
         .formStyle(.grouped)
     }
 }
 
-/// Slider with title, value and explanation.
+/// Slider with title, value and explanation. Literal title and help are localized like Text("…");
+/// already-localized Strings (String(localized:)) go through the String overload.
 struct SliderRow: View {
-    let title: String
+    let title: Text
     @Binding var value: Double
     let range: ClosedRange<Double>
     let step: Double
     let format: String
-    let help: String?
+    let help: Text?
 
+    init(_ title: LocalizedStringKey, value: Binding<Double>, in range: ClosedRange<Double>, step: Double,
+         format: String = "%.2f", help: LocalizedStringKey? = nil)
+    {
+        self.init(title: Text(title), value: value, range: range, step: step, format: format,
+                  help: help.map { Text($0) })
+    }
+
+    @_disfavoredOverload
     init(_ title: String, value: Binding<Double>, in range: ClosedRange<Double>, step: Double,
          format: String = "%.2f", help: String? = nil)
+    {
+        self.init(title: Text(verbatim: title), value: value, range: range, step: step, format: format,
+                  help: help.map { Text(verbatim: $0) })
+    }
+
+    private init(title: Text, value: Binding<Double>, range: ClosedRange<Double>, step: Double, format: String,
+                 help: Text?)
     {
         self.title = title
         self._value = value
@@ -785,13 +800,13 @@ struct SliderRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text(title)
+                title
                 Spacer()
                 Text(String(format: format, value)).monospacedDigit().foregroundStyle(.secondary)
             }
             Slider(value: $value, in: range, step: step)
             if let help {
-                Text(help).font(.caption).foregroundStyle(.secondary)
+                help.font(.caption).foregroundStyle(.secondary)
             }
         }
     }
@@ -812,7 +827,7 @@ struct ClaudeSessionsSection: View {
     var body: some View {
         Section {
             if entries.isEmpty {
-                Text("Aucune tâche pour l'instant.").foregroundStyle(.secondary)
+                Text("No tasks yet.").foregroundStyle(.secondary)
             }
             ForEach(entries.prefix(8)) { entry in
                 HStack {
@@ -821,13 +836,13 @@ struct ClaudeSessionsSection: View {
                         Text(entry.time).font(.caption).foregroundStyle(.secondary)
                     }
                     Spacer()
-                    Button("Ouvrir dans Terminal") { open(entry) }
+                    Button("Open in Terminal") { open(entry) }
                 }
             }
         } header: {
-            Text("Sessions Claude Code")
+            Text("Claude Code sessions")
         } footer: {
-            Text("Rouvre la session avec tout son historique : tu peux lire ce que Claude a fait et lui répondre. À la voix : « open the Claude session », ou « tell Claude go ahead » pour lui répondre.")
+            Text("Reopens the session with its full history: you can read what Claude did and reply to it. By voice: “open the Claude session”, or “tell Claude go ahead” to reply.")
         }
         .onAppear(perform: load)
     }
@@ -864,7 +879,7 @@ struct LearnedSection: View {
     var body: some View {
         Section {
             if rules.isEmpty && shortcuts.isEmpty {
-                Text("Rien pour l'instant. Dis « remember that… », ou « when I say focus mode, close Slack and open Notes ».")
+                Text("Nothing yet. Say “remember that…”, or “when I say focus mode, close Slack and open Notes”.")
                     .foregroundStyle(.secondary)
             }
             ForEach(Array(rules.enumerated()), id: \.offset) { index, rule in
@@ -875,16 +890,18 @@ struct LearnedSection: View {
             }
             ForEach(shortcuts, id: \.key) { item in
                 let uses = item.entry["uses"] as? Int ?? 0
-                row(icon: "bolt.fill", title: "« \(item.entry["phrase"] as? String ?? item.key) »",
-                    detail: "\((item.entry["calls"] as? [Any])?.count ?? 0) action(s) · utilisé \(uses) fois") {
+                let phrase = item.entry["phrase"] as? String ?? item.key
+                let actions = (item.entry["calls"] as? [Any])?.count ?? 0
+                row(icon: "bolt.fill", title: String(localized: "“\(phrase)”"),
+                    detail: String(localized: "\(actions) action(s) · used \(uses) times")) {
                     shortcuts.removeAll { $0.key == item.key }
                     write(Dictionary(uniqueKeysWithValues: shortcuts.map { ($0.key, $0.entry) }), to: Self.learnedFile)
                 }
             }
         } header: {
-            Text("Mémoire et raccourcis appris")
+            Text("Memory and learned shortcuts")
         } footer: {
-            Text("Les raccourcis sont rejoués en ~0,1 s, sans le modèle. Les règles sont rappelées au modèle à chaque question.")
+            Text("Shortcuts are replayed in ~0.1 s, without the model. Rules are given to the model with every question.")
         }
         .onAppear(perform: load)
     }
@@ -899,7 +916,7 @@ struct LearnedSection: View {
             Spacer()
             Button(role: .destructive, action: remove) { Image(systemName: "trash") }
                 .buttonStyle(.borderless)
-                .help("Supprimer")
+                .help("Delete")
         }
     }
 

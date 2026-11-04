@@ -2,6 +2,8 @@ name: VoiceIsland
 options:
   deploymentTarget:
     macOS: "14.0"
+  # English first; French comes from the String Catalogs (Localizable.xcstrings, InfoPlist.xcstrings).
+  developmentLanguage: en
 packages:
   LiveKit:
     url: https://github.com/livekit/client-sdk-swift
@@ -18,15 +20,17 @@ targets:
       path: VoiceIsland/Info.plist
       properties:
         CFBundleDisplayName: Voice Island
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations: [en, fr]
         # Menu bar app: no Dock icon.
         LSUIElement: true
-        NSMicrophoneUsageDescription: L'assistant écoute ta voix quand tu l'actives avec le raccourci clavier.
-        NSSpeechRecognitionUsageDescription: La dictée transcrit ta voix sur le Mac, sans rien envoyer.
-        NSCalendarsFullAccessUsageDescription: L'assistant lit et ajoute des rendez-vous quand tu le demandes ; déplacer ou supprimer demande ta confirmation.
-        NSRemindersFullAccessUsageDescription: L'assistant ajoute les rappels que tu lui demandes.
+        NSMicrophoneUsageDescription: Voice Island listens to your voice when you start it with the keyboard shortcut.
+        NSSpeechRecognitionUsageDescription: Dictation transcribes your voice on this Mac and sends nothing anywhere.
+        NSCalendarsFullAccessUsageDescription: The assistant reads and adds events when you ask; moving or deleting one asks for your confirmation.
+        NSRemindersFullAccessUsageDescription: The assistant adds the reminders you ask for.
         # The repo's web/ folder, to read the settings and launch dev.sh without a hard-coded path.
         VoiceIslandWebDir: $(SRCROOT)/../web
-        NSAppleEventsUsageDescription: L'assistant lit l'onglet Chrome affiché et y ouvre YouTube quand tu le lui demandes.
+        NSAppleEventsUsageDescription: The assistant reads the Chrome tab on screen and opens YouTube in it when you ask.
     # Signing and bundle ID: Config/Base.xcconfig (ad hoc by default), overridden by Config/Local.xcconfig
     # (not versioned) to sign with your own certificate.
     configFiles:
@@ -37,6 +41,8 @@ targets:
         SWIFT_VERSION: "5.0"
         GENERATE_INFOPLIST_FILE: NO
         ENABLE_HARDENED_RUNTIME: NO
+        SWIFT_EMIT_LOC_STRINGS: YES
+        LOCALIZATION_PREFERS_STRING_CATALOGS: YES
     dependencies:
       - package: LiveKit
         product: LiveKit

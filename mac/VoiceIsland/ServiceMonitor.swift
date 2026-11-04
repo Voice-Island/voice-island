@@ -12,11 +12,11 @@ final class ServiceMonitor: ObservableObject {
     }
 
     @Published private(set) var services: [Service] = [
-        Service(id: "livekit", name: "LiveKit", detail: "transport audio · port 7880"),
+        Service(id: "livekit", name: "LiveKit", detail: String(localized: "audio transport · port 7880")),
         Service(id: "llm", name: "LLM", detail: "mlx_lm.server · port 8080"),
-        Service(id: "tts", name: "Voix", detail: "tts_server.py · port 8090"),
+        Service(id: "tts", name: String(localized: "Voice"), detail: "tts_server.py · port 8090"),
         Service(id: "agent", name: "Agent", detail: "agent.py"),
-        Service(id: "web", name: "Interface web (facultative)", detail: "Next.js · port 3010 · ./dev.sh web"),
+        Service(id: "web", name: String(localized: "Web interface (optional)"), detail: "Next.js · port 3010 · ./dev.sh web"),
     ]
     @Published private(set) var busy: String?
 
@@ -50,8 +50,8 @@ final class ServiceMonitor: ObservableObject {
         }
     }
 
-    func startAll() { run("dev.sh", label: "Démarrage… (1 à 2 min la première fois)") }
-    func stopAll() { run("dev.sh stop", label: "Arrêt…") }
+    func startAll() { run("dev.sh", label: String(localized: "Starting… (1 to 2 min the first time)")) }
+    func stopAll() { run("dev.sh stop", label: String(localized: "Stopping…")) }
 
     /// Runs dev.sh in a login shell (the user's PATH: uv, livekit-server, nvm).
     private func run(_ command: String, label: String) {

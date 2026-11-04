@@ -138,6 +138,29 @@ async def transcribe(request: web.Request) -> web.Response:
     # ?language=latin (agent commands): any Latin language, Whisper guesses the language on fallback.
     language = request.query.get("language") or dictation.get("language", "auto")
 
+    # ?partial=1: live text while the dictation key is held (the app sends the audio so far, ~every 0.6 s).
+    # Parakeet only, no Whisper fallback (the final pass on release does that), not logged. With "Listen only to my
+    # voice", another voice must never appear, even for a moment: nothing is shown until 1.5 s of the owner's voice.
+    if request.query.get("partial") == "1":
+        check, threshold = voice_id.settings_for("dictation")
+        if check:
+            if audio.size < 24000:
+                return web.json_response({"text": "", "partial": True})
+            similarity = await asyncio.to_thread(voice_id.score, audio)
+            if similarity is None or similarity < threshold:
+                return web.json_response({"text": "", "partial": True})
+
+        def partial() -> str:
+            import mlx.core as mx
+
+            return _load_stt(name).generate(mx.array(audio)).text.strip()
+
+        try:
+            text = await asyncio.wrap_future(MLX_THREAD.submit(partial))
+        except Exception as e:
+            return web.json_response({"error": str(e)}, status=500)
+        return web.json_response({"text": text, "partial": True})
+
     def work() -> str:
         import mlx.core as mx
 

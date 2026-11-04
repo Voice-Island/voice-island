@@ -7,7 +7,10 @@ struct IslandView: View {
 
     static let expandedWidth: CGFloat = 520
 
-    private var notch: CGSize {
+    private var notch: CGSize { Self.notch }
+
+    /// Camera notch of the built-in screen; shared with the dictation frame so both open the same way.
+    static var notch: CGSize {
         let screen = NSScreen.screens.first(where: { $0.safeAreaInsets.top > 0 }) ?? NSScreen.main
         let size = screen?.notchSize ?? .zero
         // Screen without a notch: a pill of equivalent size below the top of the screen.
@@ -52,17 +55,19 @@ struct IslandContent: View {
                     .contentTransition(.symbolEffect(.replace))
                     .lineLimit(1)
                 IslandButton(symbol: controller.voiceReplies ? "speaker.wave.2.fill" : "speaker.slash.fill",
-                             help: controller.voiceReplies ? "Réponses en texte seulement (⌃ ⌥ Espace)"
-                                 : "Réponses à voix haute (⌃ ⌥ Espace)",
+                             help: controller.voiceReplies ? String(localized: "Replies in text only (⌃ ⌥ Space)")
+                                 : String(localized: "Replies out loud (⌃ ⌥ Space)"),
                              tint: controller.voiceReplies ? nil : .orange) { controller.toggleVoiceReplies() }
                     .padding(.leading, 8)
                 IslandButton(symbol: controller.micMuted ? "mic.slash.fill" : "mic.fill",
-                             help: controller.micMuted ? "Rallumer le micro (⌃ ⌥ M)" : "Couper le micro (⌃ ⌥ M)",
+                             help: controller.micMuted ? String(localized: "Unmute the mic (⌃ ⌥ M)")
+                                 : String(localized: "Mute the mic (⌃ ⌥ M)"),
                              tint: controller.micMuted ? .red : nil) { controller.toggleMute() }
-                IslandButton(symbol: "keyboard", help: controller.typing ? "Masquer le champ (⌃ ⌥ T)" : "Écrire (⌃ ⌥ T)",
+                IslandButton(symbol: "keyboard", help: controller.typing ? String(localized: "Hide the field (⌃ ⌥ T)")
+                                 : String(localized: "Type (⌃ ⌥ T)"),
                              tint: controller.typing ? .white : nil) { controller.toggleTyping() }
-                IslandButton(symbol: "gearshape.fill", help: "Tableau de bord") { controller.openDashboard() }
-                IslandButton(symbol: "xmark", help: "Fermer") { controller.stop() }
+                IslandButton(symbol: "gearshape.fill", help: String(localized: "Dashboard")) { controller.openDashboard() }
+                IslandButton(symbol: "xmark", help: String(localized: "Close")) { controller.stop() }
             }
             .frame(height: notch.height)
 
@@ -78,11 +83,11 @@ struct IslandContent: View {
                     .lineLimit(2)
                     .transition(.opacity)
                 if action.awaitsConfirmation {
-                    // Or say "oui" / "non" (yes / no): the agent hears it too.
+                    // Or say "yes" / "no" ("oui" / "non"): the agent hears it too.
                     HStack(spacing: 8) {
-                        Button("Oui") { controller.confirm(action, yes: true) }
+                        Button("Yes") { controller.confirm(action, yes: true) }
                             .buttonStyle(.borderedProminent)
-                        Button("Non") { controller.confirm(action, yes: false) }
+                        Button("No") { controller.confirm(action, yes: false) }
                             .buttonStyle(.bordered)
                     }
                     .controlSize(.small)
@@ -141,9 +146,11 @@ struct IslandContent: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 if user == nil && agent == nil {
-                    Text(controller.mode == .chat ? (session.agent.isConnected ? "Écris ta demande…" : "Connexion…")
-                         : controller.micMuted ? "Micro coupé : je n'entends rien. ⌃ ⌥ M pour le rallumer."
-                         : (session.agent.isConnected ? "Je t'écoute… (en anglais)" : "Connexion…"))
+                    Text(controller.mode == .chat
+                         ? (session.agent.isConnected ? String(localized: "Type your request…") : String(localized: "Connecting…"))
+                         : controller.micMuted ? String(localized: "Mic muted: I can't hear anything. ⌃ ⌥ M to unmute.")
+                         : (session.agent.isConnected ? String(localized: "I'm listening… (in English)")
+                            : String(localized: "Connecting…")))
                         .font(.system(size: 13))
                         .foregroundStyle(.white.opacity(0.45))
                 }
@@ -175,15 +182,15 @@ struct IslandContent: View {
 
     private var stateText: String {
         if controller.mode == .chat && controller.micMuted {
-            return state == .thinking ? "Réfléchit" : "Chat"
+            return state == .thinking ? String(localized: "Thinking") : String(localized: "Chat")
         }
-        if controller.micMuted { return "Micro coupé" }
+        if controller.micMuted { return String(localized: "Mic muted") }
         switch state {
-        case .listening: return controller.voiceReplies ? "Écoute" : "Écoute · sans voix"
-        case .thinking: return "Réfléchit"
-        case .speaking: return "Parle"
-        case .idle, .initializing: return "Prêt"
-        case nil: return "Connexion"
+        case .listening: return controller.voiceReplies ? String(localized: "Listening") : String(localized: "Listening · no voice")
+        case .thinking: return String(localized: "Thinking")
+        case .speaking: return String(localized: "Speaking")
+        case .idle, .initializing: return String(localized: "Ready")
+        case nil: return String(localized: "Connecting")
         }
     }
 
@@ -318,7 +325,7 @@ struct ChatField: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            TextField("", text: $text, prompt: Text("Écris à l'assistant…").foregroundStyle(.white.opacity(0.35)))
+            TextField("", text: $text, prompt: Text("Type to the assistant…").foregroundStyle(.white.opacity(0.35)))
                 .textFieldStyle(.plain)
                 .font(.system(size: 14))
                 .foregroundStyle(.white)

@@ -675,14 +675,16 @@ enum CalendarBridge {
             if r.action == "move" {
                 guard let start = r.newStart.flatMap(format.date) else { return ChromeBridge.reply(["error": "bad time"]) }
                 let length = event.endDate.timeIntervalSince(event.startDate)
-                guard confirm("Move “\(event.title ?? "")”?", "From \(old)\nto \(format.string(from: start))") else {
+                let title = event.title ?? "", new = format.string(from: start)
+                guard confirm(String(localized: "Move “\(title)”?"), String(localized: "From \(old)\nto \(new)")) else {
                     return ChromeBridge.reply(["ok": false, "error": "the user cancelled"])
                 }
                 event.startDate = start
                 event.endDate = start.addingTimeInterval(length)
                 do { try store.save(event, span: .thisEvent) } catch { return fail(error) }
             } else {
-                guard confirm("Delete “\(event.title ?? "")”?", "On \(old)") else {
+                let title = event.title ?? ""
+                guard confirm(String(localized: "Delete “\(title)”?"), String(localized: "On \(old)")) else {
                     return ChromeBridge.reply(["ok": false, "error": "the user cancelled"])
                 }
                 do { try store.remove(event, span: .thisEvent) } catch { return fail(error) }
@@ -708,8 +710,8 @@ enum CalendarBridge {
         let alert = NSAlert()
         alert.messageText = title
         alert.informativeText = detail
-        alert.addButton(withTitle: "Approve")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: String(localized: "Approve"))
+        alert.addButton(withTitle: String(localized: "Cancel"))
         NSApp.activate(ignoringOtherApps: true)
         return alert.runModal() == .alertFirstButtonReturn
     }

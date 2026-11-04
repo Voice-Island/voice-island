@@ -24,31 +24,31 @@ struct VoiceIslandApp: App {
 
     var body: some Scene {
         MenuBarExtra("Voice Island", systemImage: "waveform") {
-            Button(controller.isActive ? "Arrêter l'assistant" : "Parler à l'assistant") {
+            Button(controller.isActive ? String(localized: "Stop the assistant") : String(localized: "Talk to the assistant")) {
                 controller.toggle()
             }
             if controller.isActive {
-                Button(controller.voiceReplies ? "Répondre en texte seulement" : "Répondre à voix haute") {
+                Button(controller.voiceReplies ? String(localized: "Reply in text only") : String(localized: "Reply out loud")) {
                     controller.toggleVoiceReplies()
                 }
-                Button(controller.typing ? "Masquer le champ de saisie" : "Écrire à l'assistant") {
+                Button(controller.typing ? String(localized: "Hide the input field") : String(localized: "Type to the assistant")) {
                     controller.toggleTyping()
                 }
             } else {
-                Button("Parler sans réponse vocale") { controller.toggle(mode: .command) }
-                Button("Écrire à l'assistant (chat)") { controller.toggle(mode: .chat) }
+                Button("Talk without voice replies") { controller.toggle(mode: .command) }
+                Button("Type to the assistant (chat)") { controller.toggle(mode: .chat) }
             }
             if controller.isActive {
-                Button(controller.micMuted ? "Rallumer le micro" : "Couper le micro") { controller.toggleMute() }
+                Button(controller.micMuted ? String(localized: "Unmute the mic") : String(localized: "Mute the mic")) { controller.toggleMute() }
             }
-            Button("Tableau de bord…") { controller.openDashboard() }
+            Button("Dashboard…") { controller.openDashboard() }
             Divider()
-            Button("Interface web") {
+            Button("Web interface") {
                 NSWorkspace.shared.open(URL(string: "http://localhost:3010")!)
             }
             Divider()
-            Button("Relancer Voice Island") { controller.relaunch() }
-            Button("Quitter") { NSApp.terminate(nil) }
+            Button("Relaunch Voice Island") { controller.relaunch() }
+            Button("Quit") { NSApp.terminate(nil) }
         }
     }
 }

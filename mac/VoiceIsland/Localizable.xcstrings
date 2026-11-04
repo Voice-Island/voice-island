@@ -1,0 +1,3222 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "“%@”" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« %@ »"
+          }
+        }
+      }
+    },
+    "“Listen only to my voice” will be turned off everywhere." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« N'écouter que ma voix » sera désactivé partout."
+          }
+        }
+      }
+    },
+    "%.0f exchanges" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f échanges"
+          }
+        }
+      }
+    },
+    "%@ GB" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Go"
+          }
+        }
+      }
+    },
+    "%@ pack" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pack « %@ »"
+          }
+        }
+      }
+    },
+    "%@, %lld-core GPU" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@, GPU %lld cœurs"
+          }
+        }
+      }
+    },
+    "%@: that's you ✓" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ : c'est bien toi ✓"
+          }
+        }
+      }
+    },
+    "%@: voice not recognized ✗" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ : voix non reconnue ✗"
+          }
+        }
+      }
+    },
+    "%lld action(s) · used %lld times" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld action(s) · utilisé %lld fois"
+          }
+        }
+      }
+    },
+    "%lld GB" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Go"
+          }
+        }
+      }
+    },
+    "%lld s" : {
+
+    },
+    "≈ %@ GB to download" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "≈ %@ Go à télécharger"
+          }
+        }
+      }
+    },
+    "0 = always the same reply; higher = more varied." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0 = toujours la même réponse ; plus haut = plus varié."
+          }
+        }
+      }
+    },
+    "Actions on the Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actions sur le Mac"
+          }
+        }
+      }
+    },
+    "Add a reminder" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un rappel"
+          }
+        }
+      }
+    },
+    "Add an MCP server" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un serveur MCP"
+          }
+        }
+      }
+    },
+    "Address" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adresse"
+          }
+        }
+      }
+    },
+    "All three products" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les trois produits"
+          }
+        }
+      }
+    },
+    "Allowed tools (comma-separated, empty = all)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outils autorisés (séparés par des virgules, vide = tous)"
+          }
+        }
+      }
+    },
+    "Also remove filler words (LLM, slower)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer aussi les hésitations (LLM, plus lent)"
+          }
+        }
+      }
+    },
+    "Any other voice is silently ignored: it is neither transcribed nor shown. A very short word (“Stop”) is accepted if it closely follows a recognized sentence. This is not a lock: a recording or an imitation of your voice may get through." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une autre voix est ignorée en silence : elle n'est ni transcrite ni affichée. Un mot très court (« Stop ») est accepté s'il suit de près une phrase reconnue. Ce n'est pas un verrou : un enregistrement ou une imitation de ta voix peut passer."
+          }
+        }
+      }
+    },
+    "Any other voice is silently ignored: never transcribed, never shown. Voiceprint, threshold and test: “My voice” page. This is not a lock: a recording of your voice would get through." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une autre voix est ignorée en silence : ni transcrite, ni affichée. Empreinte, seuil et test : page « Ma voix ». Ce n'est pas un verrou : un enregistrement de ta voix passerait."
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apparence"
+          }
+        }
+      }
+    },
+    "Apple (requires macOS Dictation)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple (demande la Dictée de macOS)"
+          }
+        }
+      }
+    },
+    "Applies from the next reply" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appliqué dès la prochaine réponse"
+          }
+        }
+      }
+    },
+    "Applies from the next reply. Instructions for the tools are added automatically." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appliqué dès la prochaine réponse. Le mode d'emploi des outils est ajouté automatiquement."
+          }
+        }
+      }
+    },
+    "Applies the next time the island opens." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pris en compte à la prochaine ouverture du cadre."
+          }
+        }
+      }
+    },
+    "Approve" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Approuver"
+          }
+        }
+      }
+    },
+    "audio transport · port 7880" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "transport audio · port 7880"
+          }
+        }
+      }
+    },
+    "Automatic" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatiques"
+          }
+        }
+      }
+    },
+    "automatic emotions" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "émotions automatiques"
+          }
+        }
+      }
+    },
+    "Balanced" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Équilibré"
+          }
+        }
+      }
+    },
+    "Balanced + vision (Qwen3.5 2B looks at the screen on demand)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Équilibré + vision (Qwen3.5 2B regarde l'écran à la demande)"
+          }
+        }
+      }
+    },
+    "Calendar (asks before moving or deleting)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendrier (déplacer / supprimer : confirmation)"
+          }
+        }
+      }
+    },
+    "Can edit the project's files" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peut modifier les fichiers du projet"
+          }
+        }
+      }
+    },
+    "Can't reach the local server. Run ~/s2s-voice-assistant/web/dev.sh" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serveur local injoignable. Lance ~/s2s-voice-assistant/web/dev.sh"
+          }
+        }
+      }
+    },
+    "Can't read the settings (%@). Run web/dev.sh once." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages illisibles (%@). Lance une fois web/dev.sh."
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        }
+      }
+    },
+    "Chat" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        }
+      }
+    },
+    "Checking…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vérification…"
+          }
+        }
+      }
+    },
+    "Chip" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puce"
+          }
+        }
+      }
+    },
+    "Chrome · %@" : {
+
+    },
+    "Claude Code" : {
+
+    },
+    "Claude Code sessions" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sessions Claude Code"
+          }
+        }
+      }
+    },
+    "Cleaning up…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mise au propre…"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
+          }
+        }
+      }
+    },
+    "Close the visible Chrome tab" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer l'onglet Chrome affiché"
+          }
+        }
+      }
+    },
+    "Command" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commande"
+          }
+        }
+      }
+    },
+    "Command and arguments" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commande et arguments"
+          }
+        }
+      }
+    },
+    "Computing the voiceprint…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calcul de l'empreinte…"
+          }
+        }
+      }
+    },
+    "Connecting" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion"
+          }
+        }
+      }
+    },
+    "Connecting…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion…"
+          }
+        }
+      }
+    },
+    "Couldn't save: %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement impossible : %@"
+          }
+        }
+      }
+    },
+    "Dashboard" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableau de bord"
+          }
+        }
+      }
+    },
+    "Dashboard…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableau de bord…"
+          }
+        }
+      }
+    },
+    "Delegate to Claude Code (cloud)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déléguer à Claude Code (cloud)"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer"
+          }
+        }
+      }
+    },
+    "Delete “%@”?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer « %@ » ?"
+          }
+        }
+      }
+    },
+    "Dictating…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée…"
+          }
+        }
+      }
+    },
+    "Dictating… release to type" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée… relâche pour écrire"
+          }
+        }
+      }
+    },
+    "Dictation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée"
+          }
+        }
+      }
+    },
+    "Dictation (⌥ N by default)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée (⌥ N par défaut)"
+          }
+        }
+      }
+    },
+    "Dictation (hold):" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée (maintenir) :"
+          }
+        }
+      }
+    },
+    "Dictation: allow speech recognition in System Settings." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée : autorise la reconnaissance vocale dans Réglages Système."
+          }
+        }
+      }
+    },
+    "Dictation: language “%@” isn't available on this Mac (System Settings › Keyboard › Dictation)." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée : langue « %@ » non disponible sur ce Mac (Réglages Système › Clavier › Dictée)."
+          }
+        }
+      }
+    },
+    "Dictation: mic unavailable (%@)." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée : micro indisponible (%@)."
+          }
+        }
+      }
+    },
+    "Dictation: the voice server isn't responding (is web/dev.sh running?)." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dictée : le serveur de voix ne répond pas (web/dev.sh lancé ?)."
+          }
+        }
+      }
+    },
+    "Each product's shortcuts are on its own page: Dictation, Voice commands, Voice assistant." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les raccourcis de chaque produit sont sur sa page : Dictée, Commandes vocales, Assistant vocal."
+          }
+        }
+      }
+    },
+    "Emotions" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Émotions"
+          }
+        }
+      }
+    },
+    "End of turn" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin de tour"
+          }
+        }
+      }
+    },
+    "end of turn %lld" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fin de tour %lld"
+          }
+        }
+      }
+    },
+    "End-of-sentence silence" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Silence de fin de phrase"
+          }
+        }
+      }
+    },
+    "End-of-turn detector (English)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détecteur de fin de tour (anglais)"
+          }
+        }
+      }
+    },
+    "Engine" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moteur"
+          }
+        }
+      }
+    },
+    "Erase" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer"
+          }
+        }
+      }
+    },
+    "Erase my voiceprint" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer mon empreinte"
+          }
+        }
+      }
+    },
+    "Erase your voiceprint?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer ton empreinte vocale ?"
+          }
+        }
+      }
+    },
+    "Everything is running: press ⌥ Space to talk." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout tourne : ⌥ Espace pour parler."
+          }
+        }
+      }
+    },
+    "Examples: “open Chrome”, “what apps are open”, “search YouTube for lo-fi on my personal account”. Screen context adds one line per question (frontmost app, open apps), without a screenshot." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exemples : « open Chrome », « what apps are open », « search YouTube for lo-fi on my personal account ». Le contexte écran ajoute une ligne par question (app au premier plan, apps ouvertes), sans capture d'écran."
+          }
+        }
+      }
+    },
+    "Failed: %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec : %@"
+          }
+        }
+      }
+    },
+    "Fast." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapide."
+          }
+        }
+      }
+    },
+    "Fast. M1 chip: a bit slower." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapide. Puce M1 : un peu plus lent."
+          }
+        }
+      }
+    },
+    "female" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "femme"
+          }
+        }
+      }
+    },
+    "First close the current conversation." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferme d'abord la conversation en cours."
+          }
+        }
+      }
+    },
+    "First record your voice on the “My voice” page." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistre d'abord ta voix dans la page « Ma voix »."
+          }
+        }
+      }
+    },
+    "Fixed style" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style fixe"
+          }
+        }
+      }
+    },
+    "Free disk space" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espace disque libre"
+          }
+        }
+      }
+    },
+    "From %@\nto %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du %1$@\nau %2$@"
+          }
+        }
+      }
+    },
+    "From the next conversation: %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À la prochaine conversation : %@"
+          }
+        }
+      }
+    },
+    "Full" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complet"
+          }
+        }
+      }
+    },
+    "Gemma 3 4B · no tools" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gemma 3 4B · sans outils"
+          }
+        }
+      }
+    },
+    "Give a label to each account you name out loud (“personal”, “work”). Without a label, “personal” = the Default profile." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donne une étiquette au compte que tu nommes à l'oral (« personal », « work »). Sans étiquette, « personal » = profil Default."
+          }
+        }
+      }
+    },
+    "Gmail draft (never sent)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brouillon Gmail (jamais envoyé)"
+          }
+        }
+      }
+    },
+    "Google accounts" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comptes Google"
+          }
+        }
+      }
+    },
+    "Hi, this is my voice. I use this assistant every day to open my apps, write my messages and look things up on the web." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonjour, voici ma voix. J'utilise cet assistant tous les jours pour ouvrir mes applications, écrire mes messages et chercher des informations sur le web."
+          }
+        }
+      }
+    },
+    "Hide the field (⌃ ⌥ T)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer le champ (⌃ ⌥ T)"
+          }
+        }
+      }
+    },
+    "Hide the input field" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer le champ de saisie"
+          }
+        }
+      }
+    },
+    "Higher = ignores noise; too high = cuts off soft voices." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus haut = ignore les bruits ; trop haut = coupe les voix douces."
+          }
+        }
+      }
+    },
+    "Higher: other voices get through even less, but your very short words may be rejected. Measured: your voice ≥ 0.42, other voices ≤ 0.36." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus haut : les autres voix passent encore moins, mais tes mots très courts risquent d'être refusés. Mesures : ta voix ≥ 0,42, autres voix ≤ 0,36."
+          }
+        }
+      }
+    },
+    "Hold Fn alone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maintenir Fn seule"
+          }
+        }
+      }
+    },
+    "Hold Fn, speak, release. Fn with another key (arrows, F1…) or a short press cancels. In System Settings › Keyboard, set “Press 🌐 key to” to “Do Nothing”, and remove Fn from other dictation apps." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maintiens Fn, parle, relâche. Fn avec une autre touche (flèches, F1…) ou un appui bref annule. Dans Réglages Système › Clavier, règle « Appuyer sur la touche 🌐 pour » sur « Ne rien faire », et retire Fn des autres apps de dictée."
+          }
+        }
+      }
+    },
+    "Hold the shortcut, speak, release: the text is typed wherever the cursor is, in any app, without being sent." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maintiens le raccourci, parle, relâche : le texte s'écrit là où se trouve le curseur, dans n'importe quelle app, sans être envoyé."
+          }
+        }
+      }
+    },
+    "HTTP" : {
+
+    },
+    "HTTP address (http://…/mcp) or local command (e.g. npx -y @modelcontextprotocol/server-filesystem ~/Documents). Limit the allowed tools: a small model gets lost in a long list. Applies from the next conversation." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adresse HTTP (http://…/mcp) ou commande locale (ex. npx -y @modelcontextprotocol/server-filesystem ~/Documents). Limite les outils autorisés : un petit modèle se perd avec une longue liste. Pris en compte à la prochaine conversation."
+          }
+        }
+      }
+    },
+    "I'm listening… (in English)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je t'écoute… (en anglais)"
+          }
+        }
+      }
+    },
+    "In the morning, I start by reading my emails, then I prepare my presentations. After that I make calls and take notes during meetings." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le matin, je commence par lire mes emails, puis je prépare mes présentations. Ensuite je passe des appels et je prends des notes pendant les réunions."
+          }
+        }
+      }
+    },
+    "Instant commands, without the model" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes instantanées, sans le modèle"
+          }
+        }
+      }
+    },
+    "Instructions for the model" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instructions données au modèle"
+          }
+        }
+      }
+    },
+    "Interruption" : {
+
+    },
+    "Island position" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position du cadre"
+          }
+        }
+      }
+    },
+    "Know what's open on screen" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Savoir ce qui est ouvert à l'écran"
+          }
+        }
+      }
+    },
+    "Kokoro · fastest, no emotion" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kokoro · le plus rapide, sans émotion"
+          }
+        }
+      }
+    },
+    "Kokoro voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix Kokoro"
+          }
+        }
+      }
+    },
+    "label" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "étiquette"
+          }
+        }
+      }
+    },
+    "Language" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue"
+          }
+        }
+      }
+    },
+    "Language model" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèle de langage"
+          }
+        }
+      }
+    },
+    "Let me interrupt it" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Me laisser l'interrompre"
+          }
+        }
+      }
+    },
+    "LFM2.5 1.2B · fastest, on trial" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LFM2.5 1.2B · le plus rapide, à l'essai"
+          }
+        }
+      }
+    },
+    "Light" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Léger"
+          }
+        }
+      }
+    },
+    "Listen only to my voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N'écouter que ma voix"
+          }
+        }
+      }
+    },
+    "Listen only to my voice for…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N'écouter que ma voix pour…"
+          }
+        }
+      }
+    },
+    "Listening" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute"
+          }
+        }
+      }
+    },
+    "Listening · no voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écoute · sans voix"
+          }
+        }
+      }
+    },
+    "Live transcription" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcription en direct"
+          }
+        }
+      }
+    },
+    "LiveKit keys missing (web/livekit.keys). Run ~/s2s-voice-assistant/web/dev.sh again" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clés LiveKit absentes (web/livekit.keys). Relance ~/s2s-voice-assistant/web/dev.sh"
+          }
+        }
+      }
+    },
+    "LiveKit model under the LiveKit Model License, not open source: turn it on yourself. When off, silence decides." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèle de LiveKit sous LiveKit Model License, pas open source : à activer soi-même. Désactivé, le silence décide."
+          }
+        }
+      }
+    },
+    "Llama 3.2 3B · no tools" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llama 3.2 3B · sans outils"
+          }
+        }
+      }
+    },
+    "LLM %lld" : {
+
+    },
+    "Local services" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services locaux"
+          }
+        }
+      }
+    },
+    "Look at the screen (image, local vision model, ~2.5 GB)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regarder l'écran (image, modèle de vision local, ~2,5 Go)"
+          }
+        }
+      }
+    },
+    "Mac language" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue du Mac"
+          }
+        }
+      }
+    },
+    "male" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "homme"
+          }
+        }
+      }
+    },
+    "Max duration" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durée max"
+          }
+        }
+      }
+    },
+    "Max length" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Longueur max"
+          }
+        }
+      }
+    },
+    "Max wait after the sentence" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attente max après la phrase"
+          }
+        }
+      }
+    },
+    "Medium · most accurate, heavy" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium · le plus précis, lourd"
+          }
+        }
+      }
+    },
+    "Memory" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mémoire"
+          }
+        }
+      }
+    },
+    "Memory and learned shortcuts" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mémoire et raccourcis appris"
+          }
+        }
+      }
+    },
+    "Memory available to the GPU" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mémoire utilisable par le GPU"
+          }
+        }
+      }
+    },
+    "Mic muted" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micro coupé"
+          }
+        }
+      }
+    },
+    "Mic muted: I can't hear anything. ⌃ ⌥ M to unmute." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micro coupé : je n'entends rien. ⌃ ⌥ M pour le rallumer."
+          }
+        }
+      }
+    },
+    "Mic unavailable: %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micro indisponible : %@"
+          }
+        }
+      }
+    },
+    "Min duration to interrupt" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durée min pour interrompre"
+          }
+        }
+      }
+    },
+    "Min wait after the sentence" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attente min après la phrase"
+          }
+        }
+      }
+    },
+    "Min words to interrupt" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mots min pour interrompre"
+          }
+        }
+      }
+    },
+    "MiniCPM5 2B · tools, on trial" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MiniCPM5 2B · outils, à l'essai"
+          }
+        }
+      }
+    },
+    "Minimum silence" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Silence minimal"
+          }
+        }
+      }
+    },
+    "Mode" : {
+
+    },
+    "Model" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèle"
+          }
+        }
+      }
+    },
+    "Moonshine · English, live text, fastest" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moonshine · anglais, texte en direct, le plus rapide"
+          }
+        }
+      }
+    },
+    "Moonshine model" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèle Moonshine"
+          }
+        }
+      }
+    },
+    "Move “%@”?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déplacer « %@ » ?"
+          }
+        }
+      }
+    },
+    "Mute / unmute microphone:" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couper / rallumer le micro :"
+          }
+        }
+      }
+    },
+    "Mute microphone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couper le micro"
+          }
+        }
+      }
+    },
+    "Mute the mic" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couper le micro"
+          }
+        }
+      }
+    },
+    "Mute the mic (⌃ ⌥ M)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couper le micro (⌃ ⌥ M)"
+          }
+        }
+      }
+    },
+    "My MCP tools" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mes outils MCP"
+          }
+        }
+      }
+    },
+    "My voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ma voix"
+          }
+        }
+      }
+    },
+    "My voiceprint" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon empreinte vocale"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        }
+      }
+    },
+    "new server" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nouveau serveur"
+          }
+        }
+      }
+    },
+    "New Terminal (with Claude Code if needed)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau Terminal (avec Claude Code au besoin)"
+          }
+        }
+      }
+    },
+    "No" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non"
+          }
+        }
+      }
+    },
+    "No conversation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune conversation"
+          }
+        }
+      }
+    },
+    "No tasks yet." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune tâche pour l'instant."
+          }
+        }
+      }
+    },
+    "No voice heard." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas de voix entendue."
+          }
+        }
+      }
+    },
+    "Non-verbal sounds (laugh, sigh)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sons non verbaux (rire, soupir)"
+          }
+        }
+      }
+    },
+    "none" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "aucune"
+          }
+        }
+      }
+    },
+    "Not recommended: not enough memory to listen, think and speak at once." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déconseillé : pas assez de mémoire pour écouter, réfléchir et parler à la fois."
+          }
+        }
+      }
+    },
+    "Nothing yet. Say “remember that…”, or “when I say focus mode, close Slack and open Notes”." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien pour l'instant. Dis « remember that… », ou « when I say focus mode, close Slack and open Notes »."
+          }
+        }
+      }
+    },
+    "Off" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivées"
+          }
+        }
+      }
+    },
+    "On %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le %@"
+          }
+        }
+      }
+    },
+    "One language model serves both commands and the assistant: two models loaded at once would take twice the memory." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un seul modèle de langage sert aux commandes et à l'assistant : deux modèles chargés à la fois prendraient deux fois plus de mémoire."
+          }
+        }
+      }
+    },
+    "One model for voice commands and the assistant: changing it reloads the model and clears its cache (the first reply is slower)." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un seul modèle pour les commandes vocales et l'assistant : en changer recharge le modèle et vide son cache (la première réponse est plus lente)."
+          }
+        }
+      }
+    },
+    "Only the Qwen3-TTS engines can express emotion. Automatic: the LLM writes a tone before each sentence." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuls les moteurs Qwen3-TTS jouent une émotion. Automatique : le LLM écrit un ton avant chaque phrase."
+          }
+        }
+      }
+    },
+    "Open a folder" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir un dossier"
+          }
+        }
+      }
+    },
+    "Open a website" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir un site web"
+          }
+        }
+      }
+    },
+    "Open an app" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir une application"
+          }
+        }
+      }
+    },
+    "Open in Terminal" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir dans Terminal"
+          }
+        }
+      }
+    },
+    "Open logs" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir les journaux"
+          }
+        }
+      }
+    },
+    "Open the Claude Code session in Terminal" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir la session Claude Code dans Terminal"
+          }
+        }
+      }
+    },
+    "Open the dashboard:" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir le tableau de bord :"
+          }
+        }
+      }
+    },
+    "Open, close, place a window (“Chrome on the left”), pause, search: done in ~0.1 s, in English or French. Everything else goes through the language model." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir, fermer, placer une fenêtre (« Chrome à gauche »), pause, recherche : exécuté en ~0,1 s, aussi en français. Le reste passe par le modèle de langage."
+          }
+        }
+      }
+    },
+    "Parakeet (dictation), Qwen2.5 1.5B (commands), Kokoro (voice)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parakeet (dictée), Qwen2.5 1.5B (commandes), Kokoro (voix)"
+          }
+        }
+      }
+    },
+    "Parakeet (dictation), Qwen3 4B (commands and assistant), Kokoro (voice)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parakeet (dictée), Qwen3 4B (commandes et assistant), Kokoro (voix)"
+          }
+        }
+      }
+    },
+    "Parakeet detects the language on its own; the chosen language is used by the Apple engine and by the Whisper fallback when Parakeet gets the alphabet wrong." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parakeet devine la langue tout seul ; la langue choisie sert au moteur Apple et au repli Whisper quand Parakeet se trompe d'alphabet."
+          }
+        }
+      }
+    },
+    "Parakeet understands French, English and German; it transcribes the whole sentence after the silence. Moonshine only hears English, but shows the text live." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parakeet comprend le français, l'anglais et l'allemand ; il transcrit la phrase entière après le silence. Moonshine n'entend que l'anglais, mais affiche le texte en direct."
+          }
+        }
+      }
+    },
+    "Parakeet v3 (local, open source, 25 languages)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parakeet v3 (local, open source, 25 langues)"
+          }
+        }
+      }
+    },
+    "Parakeet v3 (NVIDIA) · French and English" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parakeet v3 (NVIDIA) · français et anglais"
+          }
+        }
+      }
+    },
+    "Parakeet: French, English, German; the whole sentence is transcribed after the silence, and the silence decides the end of turn." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parakeet : français, anglais, allemand ; phrase entière transcrite après le silence, fin de tour décidée par le silence."
+          }
+        }
+      }
+    },
+    "Pause, play, next, full screen" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause, lecture, suivant, plein écran"
+          }
+        }
+      }
+    },
+    "Permissions" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Droits"
+          }
+        }
+      }
+    },
+    "Place a window (left, right, full screen)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placer une fenêtre (gauche, droite, plein écran)"
+          }
+        }
+      }
+    },
+    "Play a YouTube video" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancer une vidéo YouTube"
+          }
+        }
+      }
+    },
+    "Press once to open, again to close." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une fois pour ouvrir, une deuxième fois pour fermer."
+          }
+        }
+      }
+    },
+    "Press once to open, again to close. During a voice conversation, the same shortcut turns spoken replies off or on without losing the thread." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une fois pour ouvrir, une deuxième fois pour fermer. Pendant une conversation vocale, le même raccourci coupe ou rallume la voix des réponses sans perdre le fil."
+          }
+        }
+      }
+    },
+    "Previous questions and answers the model keeps." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questions et réponses précédentes gardées par le modèle."
+          }
+        }
+      }
+    },
+    "Project folder" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossier du projet"
+          }
+        }
+      }
+    },
+    "Quick to respond." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapides."
+          }
+        }
+      }
+    },
+    "Quick to respond. M1 chip: a bit slower." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapides. Puce M1 : un peu plus lent."
+          }
+        }
+      }
+    },
+    "Quit" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter"
+          }
+        }
+      }
+    },
+    "Quit an app" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter une application"
+          }
+        }
+      }
+    },
+    "Qwen voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix Qwen"
+          }
+        }
+      }
+    },
+    "Qwen2.5 0.5B · very fast, no tools" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen2.5 0.5B · très rapide, sans outils"
+          }
+        }
+      }
+    },
+    "Qwen2.5 1.5B · tools, faster" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen2.5 1.5B · outils, plus rapide"
+          }
+        }
+      }
+    },
+    "Qwen2.5 3B · tools (non-commercial license)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen2.5 3B · outils (licence non commerciale)"
+          }
+        }
+      }
+    },
+    "Qwen2.5 7B · best, slower" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen2.5 7B · meilleur, plus lent"
+          }
+        }
+      }
+    },
+    "Qwen3 4B · tools, most reliable" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen3 4B · outils, le plus fiable"
+          }
+        }
+      }
+    },
+    "Qwen3-TTS 0.6B · emotions" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen3-TTS 0.6B · émotions"
+          }
+        }
+      }
+    },
+    "Qwen3-TTS 1.7B · emotions, slower" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen3-TTS 1.7B · émotions, plus lent"
+          }
+        }
+      }
+    },
+    "Qwen3.5 2B · tools, French, on trial" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen3.5 2B · outils, français, à l'essai"
+          }
+        }
+      }
+    },
+    "Qwen3.5 4B · tools, French, on trial" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qwen3.5 4B · outils, français, à l'essai"
+          }
+        }
+      }
+    },
+    "Read the selected text (“summarize this”)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lire le texte sélectionné (« summarize this »)"
+          }
+        }
+      }
+    },
+    "Read the visible window (text, local OCR)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lire la fenêtre affichée (texte, OCR local)"
+          }
+        }
+      }
+    },
+    "Read-only (analyzes, suggests)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture seule (analyse, propose)"
+          }
+        }
+      }
+    },
+    "Reading %lld of %lld: read this text in your normal voice." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture %lld sur %lld : lis ce texte à voix normale."
+          }
+        }
+      }
+    },
+    "Reading too short: start it again from the beginning." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture trop courte : recommence-la en entier."
+          }
+        }
+      }
+    },
+    "Ready" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prêt"
+          }
+        }
+      }
+    },
+    "Recognition" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reconnaissance"
+          }
+        }
+      }
+    },
+    "Recommended for this Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recommandé pour ce Mac"
+          }
+        }
+      }
+    },
+    "Record my voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer ma voix"
+          }
+        }
+      }
+    },
+    "recorded" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "enregistrée"
+          }
+        }
+      }
+    },
+    "Redo my voiceprint" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refaire mon empreinte"
+          }
+        }
+      }
+    },
+    "Relaunch Voice Island" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relancer Voice Island"
+          }
+        }
+      }
+    },
+    "Reopens the session with its full history: you can read what Claude did and reply to it. By voice: “open the Claude session”, or “tell Claude go ahead” to reply." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rouvre la session avec tout son historique : tu peux lire ce que Claude a fait et lui répondre. À la voix : « open the Claude session », ou « tell Claude go ahead » pour lui répondre."
+          }
+        }
+      }
+    },
+    "Replies in text only (⌃ ⌥ Space)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réponses en texte seulement (⌃ ⌥ Espace)"
+          }
+        }
+      }
+    },
+    "Replies out loud (⌃ ⌥ Space)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réponses à voix haute (⌃ ⌥ Espace)"
+          }
+        }
+      }
+    },
+    "Reply in text only" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Répondre en texte seulement"
+          }
+        }
+      }
+    },
+    "Reply out loud" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Répondre à voix haute"
+          }
+        }
+      }
+    },
+    "Running" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En marche"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer"
+          }
+        }
+      }
+    },
+    "Search the web" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chercher sur le web"
+          }
+        }
+      }
+    },
+    "Search YouTube (reuses the open tab)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chercher sur YouTube (onglet ouvert réutilisé)"
+          }
+        }
+      }
+    },
+    "See open apps" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir les applications ouvertes"
+          }
+        }
+      }
+    },
+    "Set the volume" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Régler le volume"
+          }
+        }
+      }
+    },
+    "Settings unavailable" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages indisponibles"
+          }
+        }
+      }
+    },
+    "Shared by all three" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commun aux trois"
+          }
+        }
+      }
+    },
+    "Short sound when an action is done" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Petit son quand une action est faite"
+          }
+        }
+      }
+    },
+    "Shortcut below" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raccourci ci-dessous"
+          }
+        }
+      }
+    },
+    "Shortcuts are replayed in ~0.1 s, without the model. Rules are given to the model with every question." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les raccourcis sont rejoués en ~0,1 s, sans le modèle. Les règles sont rappelées au modèle à chaque question."
+          }
+        }
+      }
+    },
+    "Shorter = faster, but it may cut you off." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus court = plus rapide, risque de couper."
+          }
+        }
+      }
+    },
+    "Silent commands:" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes sans voix :"
+          }
+        }
+      }
+    },
+    "Small · more accurate" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Small · plus précis"
+          }
+        }
+      }
+    },
+    "Speak…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parle…"
+          }
+        }
+      }
+    },
+    "Speaking" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parle"
+          }
+        }
+      }
+    },
+    "Speed" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vitesse"
+          }
+        }
+      }
+    },
+    "Spoken replies" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réponses à voix haute"
+          }
+        }
+      }
+    },
+    "Start" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer"
+          }
+        }
+      }
+    },
+    "Start a conversation here or with ⌥ Space." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lance une conversation ici ou avec ⌥ Espace."
+          }
+        }
+      }
+    },
+    "Start all" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Démarrer tout"
+          }
+        }
+      }
+    },
+    "Starting… (1 to 2 min the first time)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Démarrage… (1 à 2 min la première fois)"
+          }
+        }
+      }
+    },
+    "Status" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "État"
+          }
+        }
+      }
+    },
+    "Stop" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter"
+          }
+        }
+      }
+    },
+    "Stop all" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout arrêter"
+          }
+        }
+      }
+    },
+    "Stop and check" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter et vérifier"
+          }
+        }
+      }
+    },
+    "Stop the assistant" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter l'assistant"
+          }
+        }
+      }
+    },
+    "Stopped" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêté"
+          }
+        }
+      }
+    },
+    "Stopping…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêt…"
+          }
+        }
+      }
+    },
+    "Talk to the assistant" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parler à l'assistant"
+          }
+        }
+      }
+    },
+    "Talk to the assistant:" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parler à l'assistant :"
+          }
+        }
+      }
+    },
+    "Talk without voice replies" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parler sans réponse vocale"
+          }
+        }
+      }
+    },
+    "Tell the time and date" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donner l'heure et la date"
+          }
+        }
+      }
+    },
+    "Temperature" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Température"
+          }
+        }
+      }
+    },
+    "Test" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tester"
+          }
+        }
+      }
+    },
+    "Test and adjust" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tester et régler"
+          }
+        }
+      }
+    },
+    "Test: say a sentence" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tester : dis une phrase"
+          }
+        }
+      }
+    },
+    "Text replies" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réponses en texte"
+          }
+        }
+      }
+    },
+    "The assistant hands the task to Claude Code in the background, then announces the result. Claude Code uses Anthropic's cloud. Full reports: web/logs/claude_code.log." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'assistant transmet la tâche à Claude Code en arrière-plan puis annonce le résultat. Claude Code utilise le cloud d'Anthropic. Rapports complets : web/logs/claude_code.log."
+          }
+        }
+      }
+    },
+    "The assistant needs the first four services." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'assistant a besoin des quatre premiers services."
+          }
+        }
+      }
+    },
+    "The mic isn't picking anything up. Check the selected mic and the permission, or relaunch Voice Island (menu)." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le micro ne capte rien. Vérifie le micro choisi et l'autorisation, ou relance Voice Island (menu)."
+          }
+        }
+      }
+    },
+    "the voice server isn't responding (is web/dev.sh running?)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le serveur de voix ne répond pas (web/dev.sh lancé ?)"
+          }
+        }
+      }
+    },
+    "The voice server isn't responding." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le serveur de voix ne répond pas."
+          }
+        }
+      }
+    },
+    "Thinking" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réfléchit"
+          }
+        }
+      }
+    },
+    "This Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce Mac"
+          }
+        }
+      }
+    },
+    "Three readings of about 15 s each, with the mic you usually use. The voiceprint (256 numbers, not the audio) stays on this Mac, in the macOS keychain; the readings are not kept." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trois lectures d'environ 15 s, avec le micro que tu utilises d'habitude. L'empreinte (256 nombres, pas le son) reste sur ce Mac, dans le trousseau macOS ; les lectures ne sont pas gardées."
+          }
+        }
+      }
+    },
+    "Threshold" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuil"
+          }
+        }
+      }
+    },
+    "Tiny · fastest" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiny · le plus rapide"
+          }
+        }
+      }
+    },
+    "tools" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "outils"
+          }
+        }
+      }
+    },
+    "Tools" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outils"
+          }
+        }
+      }
+    },
+    "Top center, below the camera" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En haut au centre, sous la caméra"
+          }
+        }
+      }
+    },
+    "Top left" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En haut à gauche"
+          }
+        }
+      }
+    },
+    "Top-p" : {
+
+    },
+    "total %lld ms" : {
+
+    },
+    "Transcribing…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transcription…"
+          }
+        }
+      }
+    },
+    "transcription" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "transcription"
+          }
+        }
+      }
+    },
+    "Transcription" : {
+
+    },
+    "Trigger" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déclencheur"
+          }
+        }
+      }
+    },
+    "Turn on Dictation: System Settings › Keyboard › Dictation. Nothing leaves your Mac." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active la Dictée : Réglages Système › Clavier › Dictée. Rien ne quitte le Mac."
+          }
+        }
+      }
+    },
+    "turn-taking" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tour de parole"
+          }
+        }
+      }
+    },
+    "Turn-taking" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tour de parole"
+          }
+        }
+      }
+    },
+    "Type (⌃ ⌥ T)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écrire (⌃ ⌥ T)"
+          }
+        }
+      }
+    },
+    "Type (chat):" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écrire (chat) :"
+          }
+        }
+      }
+    },
+    "Type at the cursor (reply, translation, never sent)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écrire au curseur (réponse, traduction, jamais envoyé)"
+          }
+        }
+      }
+    },
+    "Type to the assistant" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écrire à l'assistant"
+          }
+        }
+      }
+    },
+    "Type to the assistant (chat)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écrire à l'assistant (chat)"
+          }
+        }
+      }
+    },
+    "Type to the assistant…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écris à l'assistant…"
+          }
+        }
+      }
+    },
+    "Type your request…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écris ta demande…"
+          }
+        }
+      }
+    },
+    "Unknown chip" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puce inconnue"
+          }
+        }
+      }
+    },
+    "Unmute microphone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rallumer le micro"
+          }
+        }
+      }
+    },
+    "Unmute the mic" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rallumer le micro"
+          }
+        }
+      }
+    },
+    "Unmute the mic (⌃ ⌥ M)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rallumer le micro (⌃ ⌥ M)"
+          }
+        }
+      }
+    },
+    "Unsaved changes" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifications non enregistrées"
+          }
+        }
+      }
+    },
+    "Update interval" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intervalle de mise à jour"
+          }
+        }
+      }
+    },
+    "VAD threshold" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuil du VAD"
+          }
+        }
+      }
+    },
+    "Voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix"
+          }
+        }
+      }
+    },
+    "voice %lld" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "voix %lld"
+          }
+        }
+      }
+    },
+    "Voice and emotions" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix et émotions"
+          }
+        }
+      }
+    },
+    "Voice assistant" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assistant vocal"
+          }
+        }
+      }
+    },
+    "Voice biometrics" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biométrie vocale"
+          }
+        }
+      }
+    },
+    "Voice commands" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes vocales"
+          }
+        }
+      }
+    },
+    "Voice commands (silent)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes vocales, sans voix"
+          }
+        }
+      }
+    },
+    "Voice Island" : {
+
+    },
+    "Voice Island requires a Mac with Apple silicon (M1 or later)." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice Island demande un Mac avec puce Apple (M1 ou plus récent)."
+          }
+        }
+      }
+    },
+    "voice server stopped" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "serveur de voix arrêté"
+          }
+        }
+      }
+    },
+    "Voice style (in English)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style de voix (en anglais)"
+          }
+        }
+      }
+    },
+    "Voiceprint" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empreinte"
+          }
+        }
+      }
+    },
+    "Voiceprint erased." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empreinte effacée."
+          }
+        }
+      }
+    },
+    "Voiceprint recorded. Turn it on product by product below." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empreinte enregistrée. Active-la produit par produit ci-dessous."
+          }
+        }
+      }
+    },
+    "Web interface" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interface web"
+          }
+        }
+      }
+    },
+    "Web interface (optional)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interface web (facultative)"
+          }
+        }
+      }
+    },
+    "What runs well here" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce qui tourne bien ici"
+          }
+        }
+      }
+    },
+    "With a small model: slower and less clever." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avec un petit modèle : plus lent et moins malin."
+          }
+        }
+      }
+    },
+    "Work memory (claude-mem, if installed)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mémoire de travail (claude-mem, si installé)"
+          }
+        }
+      }
+    },
+    "Works well, screen vision included." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fonctionne bien, regard sur l'écran compris."
+          }
+        }
+      }
+    },
+    "Works well, screen vision included. M1 chip: a bit slower." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fonctionne bien, regard sur l'écran compris. Puce M1 : un peu plus lent."
+          }
+        }
+      }
+    },
+    "Works, with replies in a few seconds. Close memory-hungry apps." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fonctionne, réponses en quelques secondes. Ferme les apps gourmandes."
+          }
+        }
+      }
+    },
+    "Yes" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oui"
+          }
+        }
+      }
+    },
+    "You need at least 8 GB of memory." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il faut au moins 8 Go de mémoire."
+          }
+        }
+      }
+    },
+    "Your Mac" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ton Mac"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

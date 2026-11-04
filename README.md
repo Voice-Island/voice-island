@@ -1,10 +1,12 @@
-# Voice Island (working name)
+# Voice Island
+
+**Website: [voice-island.vercel.app](https://voice-island.vercel.app)**
 
 A voice assistant that runs **entirely on your Mac**: speech recognition, language model and voice, with no
 cloud service. It is three products in one menu-bar app:
 
 1. **Dictation anywhere**: hold a key (Fn alone, or a hotkey), speak, release: the text is typed at the cursor
-   in any app, never sent. French, English, German and 22 more languages.
+   in any app, never sent. The text appears live while you speak. French, English, German and 22 more languages.
 2. **Voice commands**: talk, it acts on your Mac and answers in text: opens apps and new windows, places them
    left / right, searches and plays YouTube in the tab you are on, pauses music, drafts Gmail e-mails, hands
    coding tasks to Claude Code. Simple commands ("Chrome on the left", "mets Notes à droite") run instantly,
@@ -47,7 +49,7 @@ Chrome-tab awareness, a chat mode and the speaker check.
 
 | Product | Default | What it does |
 |---|---|---|
-| Dictation | ⌃ ⌥ D held, or **Fn alone** held (dashboard › Dictée › Déclencheur) | Types what you say at the cursor; Fn with another key cancels |
+| Dictation | ⌃ ⌥ D held, or **Fn alone** held (dashboard › Dictation › Trigger) | Types what you say at the cursor; Fn with another key cancels |
 | Voice commands | ⌃ ⌥ Space | Talk, it acts and answers in text. During a voice conversation, toggles spoken replies |
 | Chat | ⌃ ⌥ T | Type, it acts and answers in text |
 | Voice assistant | ⌥ Space | Talk, it answers out loud. ⌃ ⌥ M mutes the microphone, the conversation stays open |
@@ -55,7 +57,7 @@ Chrome-tab awareness, a chat mode and the speaker check.
 
 ## Listen only to my voice (optional)
 
-In the dashboard, **Ma voix** records three short readings and stores a voiceprint (256 numbers, not audio)
+In the dashboard, **My voice** records three short readings and stores a voiceprint (256 numbers, not audio)
 in the macOS login keychain. Then turn it on per product (dictation, commands, assistant): a sentence spoken
 by another voice is dropped before transcription, silently. Measured on the owner's voice against 300 other
 voices and voices replayed in the room: full separation at the default threshold, about 0.1 s per sentence
@@ -64,7 +66,7 @@ authentication: a recording or an imitation of your voice can pass.
 
 ## Look at my screen (optional)
 
-Turn on **Regarder l'écran** in dashboard › Outils, then restart the stack (`web/dev.sh`): it starts a second
+Turn on **Look at the screen** in dashboard › Tools, then restart the stack (`web/dev.sh`): it starts a second
 local server, `mlx_vlm.server` on 127.0.0.1:8081, with Qwen3.5 2B (about 2.5 GB more memory, 2.4 GB download).
 When you ask something visual, the app captures the window in front (not the whole screen, never its own
 windows) and sends it to that server itself; only the text answer reaches the assistant. Nothing runs between
@@ -78,7 +80,7 @@ screens.
 ## Requirements
 
 - A Mac with Apple Silicon (M1 or newer) and macOS 14 or later. 16 GB of memory or more for all three products
-  (8 GB: dictation only). The dashboard page "Ton Mac" tells you what your Mac runs well.
+  (8 GB: dictation only). The dashboard page "Your Mac" tells you what your Mac runs well.
 - [Xcode](https://apps.apple.com/app/xcode/id497799835) (free, App Store): open it once after installing.
 - [Homebrew](https://brew.sh) (free).
 - About 10 GB of free disk space (the models take about 5 GB).
@@ -100,7 +102,7 @@ packages, builds the app into `~/Applications/Voice Island.app`, downloads the m
 The first run takes a while, mostly downloads. It stops with a clear message if something is missing,
 and writes the details to `web/logs/install.log`. Run it again at any time, for example after `git pull` to update.
 
-Every day after that: open **Voice Island** (Spotlight), then Dashboard (⌥ ⇧ Space) › État › Démarrer tout.
+Every day after that: open **Voice Island** (Spotlight), then Dashboard (⌥ ⇧ Space) › Status › Start all.
 A signed `.dmg` for people who don't use the Terminal is planned.
 
 <details>
@@ -130,7 +132,7 @@ Chrome. It is signed ad hoc by default, so macOS asks again after every
 rebuild; to keep the permissions, create `mac/Config/Local.xcconfig` with your own signing identity (see
 `mac/Config/Base.xcconfig`).
 
-To dictate with **Fn alone**, choose it in dashboard › Dictée, set System Settings › Keyboard › "Press 🌐 key
+To dictate with **Fn alone**, choose it in dashboard › Dictation, set System Settings › Keyboard › "Press 🌐 key
 to" to "Do Nothing", and remove Fn from any other dictation app.
 
 `web/dev.sh web` also starts the web interface on http://localhost:3010. It receives this install's LiveKit keys

@@ -108,7 +108,7 @@ def template(clips: list[np.ndarray]) -> np.ndarray:
             if len(window) >= RATE:
                 vecs.append(embed(window))
     if not vecs:
-        raise ValueError("pas assez de voix dans les lectures")
+        raise ValueError("not enough voice in the recordings")
     mean = np.mean(vecs, axis=0)
     return mean / (np.linalg.norm(mean) + 1e-9)
 
@@ -225,12 +225,12 @@ if __name__ == "__main__":
     command, files = (sys.argv[1] if len(sys.argv) > 1 else "status"), sys.argv[2:]
     if command == "enroll":
         save_print(template([_read(f) for f in files]))
-        print(f"Empreinte enregistrée dans le trousseau ({len(files)} lectures).")
+        print(f"Voiceprint saved ({len(files)} recordings).")
     elif command == "score":
         for f in files:
             print(f, score(_read(f)))
     elif command == "erase":
         erase_print()
-        print("Empreinte effacée.")
+        print("Voiceprint erased.")
     else:
         print("Empreinte :", "oui" if enrolled() else "non")

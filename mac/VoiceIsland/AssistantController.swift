@@ -115,6 +115,7 @@ final class AssistantController: ObservableObject {
             guard let self, let session = self.session, self.isActive, !self.micMuted else { return }
             _ = try? await session.room.localParticipant.setMicrophone(enabled: !paused)
         }
+        dictation.assistantOpen = { [weak self] in self?.isActive ?? false }
     }
 
     /// ⌥ Space: opens with voice / closes. ⌃ ⌥ Space: opens without voice, or during a conversation
@@ -287,7 +288,7 @@ final class AssistantController: ObservableObject {
                     micProbe.reset()
                 } else {
                     self.show(AgentAction(
-                        text: "Le micro ne capte rien. Vérifie le micro choisi et l'autorisation, ou relance Voice Island (menu).",
+                        text: String(localized: "The mic isn't picking anything up. Check the selected mic and the permission, or relaunch Voice Island (menu)."),
                         ok: false))
                     started = Date()
                     micProbe.reset()

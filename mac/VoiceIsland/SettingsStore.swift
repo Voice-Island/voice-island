@@ -139,13 +139,13 @@ struct VoiceSettings: Codable, Equatable {
     /// Settings the agent reads only at the start of a conversation.
     func nextConversationChanges(since saved: VoiceSettings) -> [String] {
         var changes: [String] = []
-        if stt != saved.stt { changes.append("transcription") }
-        if turn != saved.turn { changes.append("tour de parole") }
-        if tools != saved.tools { changes.append("outils") }
+        if stt != saved.stt { changes.append(String(localized: "transcription")) }
+        if turn != saved.turn { changes.append(String(localized: "turn-taking")) }
+        if tools != saved.tools { changes.append(String(localized: "tools")) }
         if (emotion.mode == "auto") != (saved.emotion.mode == "auto") || emotion.instructions != saved.emotion.instructions
             || emotion.sounds != saved.emotion.sounds
         {
-            changes.append("émotions automatiques")
+            changes.append(String(localized: "automatic emotions"))
         }
         return changes
     }
@@ -209,7 +209,7 @@ final class SettingsStore: ObservableObject {
             draft = settings
             error = nil
         } catch {
-            self.error = "Réglages illisibles (\(error.localizedDescription)). Lance une fois web/dev.sh."
+            self.error = String(localized: "Can't read the settings (\(error.localizedDescription)). Run web/dev.sh once.")
         }
     }
 
@@ -238,7 +238,7 @@ final class SettingsStore: ObservableObject {
             saved = draft
             error = nil
         } catch {
-            self.error = "Enregistrement impossible : \(error.localizedDescription)"
+            self.error = String(localized: "Couldn't save: \(error.localizedDescription)")
         }
     }
 
@@ -265,68 +265,68 @@ enum Choices {
     static var llmModels: [(String, String)] {
         var models: [(String, String)] = []
         for (folder, label) in [
-            ("Qwen2.5-3B-Instruct-4bit-tools", "Qwen2.5 3B · outils (licence non commerciale)"),
-            ("Qwen2.5-1.5B-Instruct-4bit-tools", "Qwen2.5 1.5B · outils, plus rapide"),
+            ("Qwen2.5-3B-Instruct-4bit-tools", String(localized: "Qwen2.5 3B · tools (non-commercial license)")),
+            ("Qwen2.5-1.5B-Instruct-4bit-tools", String(localized: "Qwen2.5 1.5B · tools, faster")),
         ] {
             let path = Paths.localModels.appendingPathComponent(folder)
             if FileManager.default.fileExists(atPath: path.path) { models.append(("local:\(folder)", label)) }
         }
-        return [("mlx-community/Qwen3-4B-Instruct-2507-4bit", "Qwen3 4B · outils, le plus fiable")] + models + [
+        return [("mlx-community/Qwen3-4B-Instruct-2507-4bit", String(localized: "Qwen3 4B · tools, most reliable"))] + models + [
             // On trial (Oct 29): smaller, native tool calls in mlx_lm (web/test/tool_eval.py).
-            ("openbmb/MiniCPM5-2B-MLX", "MiniCPM5 2B · outils, à l'essai"),
-            ("mlx-community/Qwen3.5-2B-MLX-8bit", "Qwen3.5 2B · outils, français, à l'essai"),
-            ("mlx-community/Qwen3.5-4B-OptiQ-4bit", "Qwen3.5 4B · outils, français, à l'essai"),
-            ("LiquidAI/LFM2.5-1.2B-Instruct-MLX-4bit", "LFM2.5 1.2B · le plus rapide, à l'essai"),
-            ("mlx-community/Qwen2.5-0.5B-Instruct-4bit", "Qwen2.5 0.5B · très rapide, sans outils"),
-            ("mlx-community/Qwen2.5-7B-Instruct-4bit", "Qwen2.5 7B · meilleur, plus lent"),
-            ("mlx-community/Llama-3.2-3B-Instruct-4bit", "Llama 3.2 3B · sans outils"),
-            ("mlx-community/gemma-3-4b-it-qat-4bit", "Gemma 3 4B · sans outils"),
+            ("openbmb/MiniCPM5-2B-MLX", String(localized: "MiniCPM5 2B · tools, on trial")),
+            ("mlx-community/Qwen3.5-2B-MLX-8bit", String(localized: "Qwen3.5 2B · tools, French, on trial")),
+            ("mlx-community/Qwen3.5-4B-OptiQ-4bit", String(localized: "Qwen3.5 4B · tools, French, on trial")),
+            ("LiquidAI/LFM2.5-1.2B-Instruct-MLX-4bit", String(localized: "LFM2.5 1.2B · fastest, on trial")),
+            ("mlx-community/Qwen2.5-0.5B-Instruct-4bit", String(localized: "Qwen2.5 0.5B · very fast, no tools")),
+            ("mlx-community/Qwen2.5-7B-Instruct-4bit", String(localized: "Qwen2.5 7B · best, slower")),
+            ("mlx-community/Llama-3.2-3B-Instruct-4bit", String(localized: "Llama 3.2 3B · no tools")),
+            ("mlx-community/gemma-3-4b-it-qat-4bit", String(localized: "Gemma 3 4B · no tools")),
         ]
     }
 
-    static let sttEngines = [("moonshine", "Moonshine · anglais, texte en direct, le plus rapide"),
-                             ("parakeet", "Parakeet v3 (NVIDIA) · français et anglais")]
-    static let sttModels = [("tiny", "Tiny · le plus rapide"), ("small", "Small · plus précis"),
-                            ("medium", "Medium · le plus précis, lourd")]
-    static let ttsEngines = [("kokoro", "Kokoro · le plus rapide, sans émotion"),
-                             ("qwen3-0.6b", "Qwen3-TTS 0.6B · émotions"),
-                             ("qwen3-1.7b", "Qwen3-TTS 1.7B · émotions, plus lent"),
+    static let sttEngines = [("moonshine", String(localized: "Moonshine · English, live text, fastest")),
+                             ("parakeet", String(localized: "Parakeet v3 (NVIDIA) · French and English"))]
+    static let sttModels = [("tiny", String(localized: "Tiny · fastest")), ("small", String(localized: "Small · more accurate")),
+                            ("medium", String(localized: "Medium · most accurate, heavy"))]
+    static let ttsEngines = [("kokoro", String(localized: "Kokoro · fastest, no emotion")),
+                             ("qwen3-0.6b", String(localized: "Qwen3-TTS 0.6B · emotions")),
+                             ("qwen3-1.7b", String(localized: "Qwen3-TTS 1.7B · emotions, slower")),
                              ("chatterbox-turbo", "Chatterbox Turbo")]
     static let qwenSpeakers = ["Ryan", "Aiden", "Vivian", "Serena", "Dylan", "Eric", "Uncle_Fu"]
     static let kokoroVoices = ["af_heart", "af_alloy", "af_aoede", "af_bella", "af_jessica", "af_kore", "af_nicole",
                                "af_nova", "af_river", "af_sarah", "af_sky", "am_adam", "am_echo", "am_eric",
                                "am_fenrir", "am_liam", "am_michael", "am_onyx", "am_puck", "am_santa", "bf_alice",
                                "bf_emma", "bf_isabella", "bf_lily", "bm_daniel", "bm_fable", "bm_george", "bm_lewis"]
-    static let emotionModes = [("off", "Désactivées"), ("fixed", "Style fixe"), ("auto", "Automatiques")]
+    static let emotionModes = [("off", String(localized: "Off")), ("fixed", String(localized: "Fixed style")), ("auto", String(localized: "Automatic"))]
     static let fixedStyles = ["gently warm and calm", "really bright and upbeat", "soft, almost a whisper",
                               "calm and professional", "a little playful, friendly"]
-    static let permissionModes = [("plan", "Lecture seule (analyse, propose)"),
-                                  ("acceptEdits", "Peut modifier les fichiers du projet")]
+    static let permissionModes = [("plan", String(localized: "Read-only (analyzes, suggests)")),
+                                  ("acceptEdits", String(localized: "Can edit the project's files"))]
 
-    static let tools = [("open_app", "Ouvrir une application", "app.badge"),
-                        ("quit_app", "Quitter une application", "xmark.app"),
-                        ("place_window", "Placer une fenêtre (gauche, droite, plein écran)", "rectangle.split.2x1"),
-                        ("read_selection", "Lire le texte sélectionné (« summarize this »)", "text.viewfinder"),
-                        ("insert_text", "Écrire au curseur (réponse, traduction, jamais envoyé)", "character.cursor.ibeam"),
-                        ("read_screen", "Lire la fenêtre affichée (texte, OCR local)", "macwindow"),
-                        ("look_at_screen", "Regarder l'écran (image, modèle de vision local, ~2,5 Go)", "eye"),
-                        ("calendar_events", "Calendrier (déplacer / supprimer : confirmation)", "calendar"),
-                        ("add_reminder", "Ajouter un rappel", "checklist"),
-                        ("open_website", "Ouvrir un site web", "safari"),
-                        ("search_web", "Chercher sur le web", "magnifyingglass"),
-                        ("open_folder", "Ouvrir un dossier", "folder"),
-                        ("set_volume", "Régler le volume", "speaker.wave.2"),
-                        ("get_current_time", "Donner l'heure et la date", "clock"),
-                        ("list_open_apps", "Voir les applications ouvertes", "macwindow.on.rectangle"),
-                        ("search_youtube", "Chercher sur YouTube (onglet ouvert réutilisé)", "play.rectangle"),
-                        ("play_youtube_video", "Lancer une vidéo YouTube", "play.circle"),
-                        ("draft_email", "Brouillon Gmail (jamais envoyé)", "envelope"),
-                        ("ask_claude_code", "Déléguer à Claude Code (cloud)", "chevron.left.forwardslash.chevron.right"),
-                        ("open_claude_session", "Ouvrir la session Claude Code dans Terminal", "terminal"),
-                        ("open_terminal", "Nouveau Terminal (avec Claude Code au besoin)", "apple.terminal"),
-                        ("media_control", "Pause, lecture, suivant, plein écran", "playpause"),
-                        ("close_tab", "Fermer l'onglet Chrome affiché", "xmark.square"),
-                        ("search_work_memory", "Mémoire de travail (claude-mem, si installé)", "brain")]
+    static let tools = [("open_app", String(localized: "Open an app"), "app.badge"),
+                        ("quit_app", String(localized: "Quit an app"), "xmark.app"),
+                        ("place_window", String(localized: "Place a window (left, right, full screen)"), "rectangle.split.2x1"),
+                        ("read_selection", String(localized: "Read the selected text (“summarize this”)"), "text.viewfinder"),
+                        ("insert_text", String(localized: "Type at the cursor (reply, translation, never sent)"), "character.cursor.ibeam"),
+                        ("read_screen", String(localized: "Read the visible window (text, local OCR)"), "macwindow"),
+                        ("look_at_screen", String(localized: "Look at the screen (image, local vision model, ~2.5 GB)"), "eye"),
+                        ("calendar_events", String(localized: "Calendar (asks before moving or deleting)"), "calendar"),
+                        ("add_reminder", String(localized: "Add a reminder"), "checklist"),
+                        ("open_website", String(localized: "Open a website"), "safari"),
+                        ("search_web", String(localized: "Search the web"), "magnifyingglass"),
+                        ("open_folder", String(localized: "Open a folder"), "folder"),
+                        ("set_volume", String(localized: "Set the volume"), "speaker.wave.2"),
+                        ("get_current_time", String(localized: "Tell the time and date"), "clock"),
+                        ("list_open_apps", String(localized: "See open apps"), "macwindow.on.rectangle"),
+                        ("search_youtube", String(localized: "Search YouTube (reuses the open tab)"), "play.rectangle"),
+                        ("play_youtube_video", String(localized: "Play a YouTube video"), "play.circle"),
+                        ("draft_email", String(localized: "Gmail draft (never sent)"), "envelope"),
+                        ("ask_claude_code", String(localized: "Delegate to Claude Code (cloud)"), "chevron.left.forwardslash.chevron.right"),
+                        ("open_claude_session", String(localized: "Open the Claude Code session in Terminal"), "terminal"),
+                        ("open_terminal", String(localized: "New Terminal (with Claude Code if needed)"), "apple.terminal"),
+                        ("media_control", String(localized: "Pause, play, next, full screen"), "playpause"),
+                        ("close_tab", String(localized: "Close the visible Chrome tab"), "xmark.square"),
+                        ("search_work_memory", String(localized: "Work memory (claude-mem, if installed)"), "brain")]
 
     /// Chrome profiles (= Google accounts) read from "Local State".
     static func chromeProfiles() -> [(dir: String, name: String, email: String)] {
@@ -340,11 +340,11 @@ enum Choices {
             .sorted { $0.dir < $1.dir }
     }
 
-    /// "af_heart" -> "Heart · US · femme".
+    /// "af_heart" -> "Heart · US · female".
     static func voiceLabel(_ id: String) -> String {
         let parts = id.split(separator: "_", maxSplits: 1)
         guard parts.count == 2, parts[0].count == 2 else { return id }
         let prefix = Array(parts[0])
-        return "\(parts[1].capitalized) · \(prefix[0] == "b" ? "UK" : "US") · \(prefix[1] == "m" ? "homme" : "femme")"
+        return "\(parts[1].capitalized) · \(prefix[0] == "b" ? "UK" : "US") · \(prefix[1] == "m" ? String(localized: "male") : String(localized: "female"))"
     }
 }

@@ -3,7 +3,7 @@ import IOKit
 import Metal
 
 /// What this Mac can run: chip, memory, GPU, disk, then a verdict per product.
-/// Used by the dashboard's "Ton Mac" page, and will be used by the first-launch assistant (pack choice).
+/// Used by the dashboard's "Your Mac" page, and will be used by the first-launch assistant (pack choice).
 struct MachineInfo {
     let chip: String            // "Apple M3", "Apple M1 Pro"…
     let model: String           // hardware identifier, e.g. "Mac15,13"
@@ -19,7 +19,7 @@ struct MachineInfo {
         let free = (try? home.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey]))?
             .volumeAvailableCapacityForImportantUsage ?? 0
         return MachineInfo(
-            chip: sysctlString("machdep.cpu.brand_string") ?? "Puce inconnue",
+            chip: sysctlString("machdep.cpu.brand_string") ?? String(localized: "Unknown chip"),
             model: sysctlString("hw.model") ?? "",
             memoryGB: Int((Double(ProcessInfo.processInfo.physicalMemory) / 1_073_741_824).rounded()),
             gpuBudgetGB: Double(device?.recommendedMaxWorkingSetSize ?? 0) / 1_073_741_824,
@@ -53,17 +53,17 @@ enum ModelPack: String, CaseIterable {
 
     var title: String {
         switch self {
-        case .light: return "Léger"
-        case .balanced: return "Équilibré"
-        case .full: return "Complet"
+        case .light: return String(localized: "Light")
+        case .balanced: return String(localized: "Balanced")
+        case .full: return String(localized: "Full")
         }
     }
 
     var summary: String {
         switch self {
-        case .light: return "Parakeet (dictée), Qwen2.5 1.5B (commandes), Kokoro (voix)"
-        case .balanced: return "Parakeet (dictée), Qwen3 4B (commandes et assistant), Kokoro (voix)"
-        case .full: return "Équilibré + vision (Qwen3.5 2B regarde l'écran à la demande)"
+        case .light: return String(localized: "Parakeet (dictation), Qwen2.5 1.5B (commands), Kokoro (voice)")
+        case .balanced: return String(localized: "Parakeet (dictation), Qwen3 4B (commands and assistant), Kokoro (voice)")
+        case .full: return String(localized: "Balanced + vision (Qwen3.5 2B looks at the screen on demand)")
         }
     }
 
@@ -104,36 +104,49 @@ extension MachineInfo {
     var isEntryChip: Bool { chip == "Apple M1" }
 
     var verdicts: [ProductVerdict] {
+        let all = String(localized: "All three products")
+        let dictation = String(localized: "Dictation")
+        let command = String(localized: "Voice commands")
+        let assistant = String(localized: "Voice assistant")
         guard appleSilicon else {
-            let note = "Voice Island demande un Mac avec puce Apple (M1 ou plus récent)."
-            return [ProductVerdict(id: "all", product: "Les trois produits", level: .no, note: note)]
+            let note = String(localized: "Voice Island requires a Mac with Apple silicon (M1 or later).")
+            return [ProductVerdict(id: "all", product: all, level: .no, note: note)]
         }
-        let slower = isEntryChip ? " Puce M1 : un peu plus lent." : ""
+        // On an M1, every note gets a second sentence; each variant is one full string for the translation.
+        let m1 = isEntryChip
         switch memoryGB {
         case ..<8:
-            return [ProductVerdict(id: "all", product: "Les trois produits", level: .no,
-                                   note: "Il faut au moins 8 Go de mémoire.")]
+            return [ProductVerdict(id: "all", product: all, level: .no,
+                                   note: String(localized: "You need at least 8 GB of memory."))]
         case ..<16:
             return [
-                ProductVerdict(id: "dictation", product: "Dictée", level: .good, note: "Rapide." + slower),
-                ProductVerdict(id: "command", product: "Commandes vocales", level: .slow,
-                               note: "Avec un petit modèle : plus lent et moins malin."),
-                ProductVerdict(id: "assistant", product: "Assistant vocal", level: .no,
-                               note: "Déconseillé : pas assez de mémoire pour écouter, réfléchir et parler à la fois."),
+                ProductVerdict(id: "dictation", product: dictation, level: .good,
+                               note: m1 ? String(localized: "Fast. M1 chip: a bit slower.") : String(localized: "Fast.")),
+                ProductVerdict(id: "command", product: command, level: .slow,
+                               note: String(localized: "With a small model: slower and less clever.")),
+                ProductVerdict(id: "assistant", product: assistant, level: .no,
+                               note: String(localized: "Not recommended: not enough memory to listen, think and speak at once.")),
             ]
         case ..<24:
             return [
-                ProductVerdict(id: "dictation", product: "Dictée", level: .good, note: "Rapide." + slower),
-                ProductVerdict(id: "command", product: "Commandes vocales", level: .good, note: "Rapides." + slower),
-                ProductVerdict(id: "assistant", product: "Assistant vocal", level: .slow,
-                               note: "Fonctionne, réponses en quelques secondes. Ferme les apps gourmandes."),
+                ProductVerdict(id: "dictation", product: dictation, level: .good,
+                               note: m1 ? String(localized: "Fast. M1 chip: a bit slower.") : String(localized: "Fast.")),
+                ProductVerdict(id: "command", product: command, level: .good,
+                               note: m1 ? String(localized: "Quick to respond. M1 chip: a bit slower.")
+                                   : String(localized: "Quick to respond.")),
+                ProductVerdict(id: "assistant", product: assistant, level: .slow,
+                               note: String(localized: "Works, with replies in a few seconds. Close memory-hungry apps.")),
             ]
         default:
             return [
-                ProductVerdict(id: "dictation", product: "Dictée", level: .good, note: "Rapide." + slower),
-                ProductVerdict(id: "command", product: "Commandes vocales", level: .good, note: "Rapides." + slower),
-                ProductVerdict(id: "assistant", product: "Assistant vocal", level: .good,
-                               note: "Fonctionne bien, regard sur l'écran compris." + slower),
+                ProductVerdict(id: "dictation", product: dictation, level: .good,
+                               note: m1 ? String(localized: "Fast. M1 chip: a bit slower.") : String(localized: "Fast.")),
+                ProductVerdict(id: "command", product: command, level: .good,
+                               note: m1 ? String(localized: "Quick to respond. M1 chip: a bit slower.")
+                                   : String(localized: "Quick to respond.")),
+                ProductVerdict(id: "assistant", product: assistant, level: .good,
+                               note: m1 ? String(localized: "Works well, screen vision included. M1 chip: a bit slower.")
+                                   : String(localized: "Works well, screen vision included.")),
             ]
         }
     }

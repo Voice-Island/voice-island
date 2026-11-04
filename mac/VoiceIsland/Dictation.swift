@@ -14,6 +14,9 @@ final class Dictation: ObservableObject {
     @Published private(set) var listening = false
     @Published private(set) var text = ""
     @Published private(set) var status = ""
+    /// `text` is a live, provisional transcription (shown in gray) until the final pass replaces it.
+    @Published private(set) var partial = false
+    private var liveTask: Task<Void, Never>?
 
     /// New for each dictation. It started without error but no longer received anything after a conversation
     /// ("0 chunks", Oct 26, 27 and 31), even when new: LiveKit's engine (voice processing, VPIO) stayed
@@ -33,6 +36,9 @@ final class Dictation: ObservableObject {
     /// Open conversation: its mic is muted during the dictation (otherwise it would hear too), then restored.
     /// Awaited before listening: the mute must not land after the mic has been restarted for the dictation.
     var pauseAssistantMic: (Bool) async -> Void = { _ in }
+    /// A conversation's island is already at the notch: the dictation frame then sits just below it.
+    var assistantOpen: () -> Bool = { false }
+    @Published private(set) var belowIsland = false
 
     /// Start in progress (mic not open yet) and what to do if the key is released in the meantime.
     private var starting = false
@@ -75,6 +81,8 @@ final class Dictation: ObservableObject {
             return
         }
         listening = false
+        liveTask?.cancel()
+        liveTask = nil
         engine.stop()
         engine.inputNode.removeTap(onBus: 0)
         // A VPIO engine kept between two dictations made the mic silent for all other apps (Oct 31:
@@ -113,20 +121,20 @@ final class Dictation: ObservableObject {
             SFSpeechRecognizer.requestAuthorization { c.resume(returning: $0 == .authorized) }
         }
         Self.log("autorisation reconnaissance vocale : \(allowed)")
-        guard allowed else { return flash("Dictée : autorise la reconnaissance vocale dans Réglages Système.") }
+        guard allowed else { return flash(String(localized: "Dictation: allow speech recognition in System Settings.")) }
         let settings = SettingsStore.dictation()
         let recognizer = SFSpeechRecognizer(locale: Locale(identifier: settings.language))
         Self.log("langue \(settings.language) : reconnaisseur \(recognizer != nil), disponible "
             + "\(recognizer?.isAvailable ?? false), sur le Mac \(recognizer?.supportsOnDeviceRecognition ?? false)")
         guard let recognizer, recognizer.isAvailable, recognizer.supportsOnDeviceRecognition
-        else { return flash("Dictée : langue « \(settings.language) » non disponible sur ce Mac (Réglages Système › Clavier › Dictée).") }
+        else { return flash(String(localized: "Dictation: language “\(settings.language)” isn't available on this Mac (System Settings › Keyboard › Dictation).")) }
         let request = SFSpeechAudioBufferRecognitionRequest()
         request.requiresOnDeviceRecognition = true
         request.shouldReportPartialResults = true
         request.addsPunctuation = true
         self.request = request
         text = ""
-        status = "Dictée…"
+        status = String(localized: "Dictating…")
         let input = engine.inputNode
         let format = input.outputFormat(forBus: 0)
         Self.log("micro : \(format.sampleRate) Hz, \(format.channelCount) canal(aux)")
@@ -145,7 +153,7 @@ final class Dictation: ObservableObject {
                     // Apple's recognition, even on the Mac, requires macOS Dictation to be enabled.
                     if error.localizedDescription.lowercased().contains("disabled") {
                         self.stop()
-                        self.flash("Active la Dictée : Réglages Système › Clavier › Dictée. Rien ne quitte le Mac.")
+                        self.flash(Self.enableDictationMessage)
                     }
                 }
                 if result?.isFinal == true || error != nil {
@@ -159,7 +167,7 @@ final class Dictation: ObservableObject {
             try engine.start()
         } catch {
             Self.log("micro : \(error.localizedDescription)")
-            return flash("Dictée : micro indisponible (\(error.localizedDescription)).")
+            return flash(String(localized: "Dictation: mic unavailable (\(error.localizedDescription))."))
         }
         Self.log("écoute démarrée")
         listening = true
@@ -196,13 +204,46 @@ final class Dictation: ObservableObject {
         } catch {
             restoreMic()
             Self.log("micro : \(error.localizedDescription)")
-            return flash("Dictée : micro indisponible (\(error.localizedDescription)).")
+            return flash(String(localized: "Dictation: mic unavailable (\(error.localizedDescription))."))
         }
         Self.log("enregistrement démarré (\(format.sampleRate) Hz -> 16 kHz, LiveKit : \(AudioManager.shared.isEngineRunning ? "allumé" : "éteint"))")
         text = ""
-        status = "Dictée… relâche pour écrire"
+        partial = false
+        status = String(localized: "Dictating… release to type")
         listening = true
         show()
+        liveTask = Task { [weak self] in await self?.liveText(recorder) }
+    }
+
+    /// Live text while the key is held: Parakeet doesn't stream, so the audio so far (its last 25 s) is transcribed
+    /// again about every 0.6 s. One request at a time: the final pass on release never waits behind a queue.
+    private func liveText(_ recorder: Recorder) async {
+        var transcribed = 0
+        while !Task.isCancelled {
+            try? await Task.sleep(nanoseconds: 600_000_000)
+            guard listening, self.recorder === recorder, !Task.isCancelled else { return }
+            let count = recorder.count
+            guard count > 8000, count != transcribed else { continue }   // at least 0.5 s, and new audio
+            transcribed = count
+            guard let live = await Self.transcribePartial(recorder.recent(seconds: 25)), !live.isEmpty,
+                listening, self.recorder === recorder, !Task.isCancelled
+            else { continue }
+            text = live
+            partial = true
+        }
+    }
+
+    /// POST /transcribe?partial=1: Parakeet only, no voice check, nothing logged on the server. Nil on any error.
+    static func transcribePartial(_ samples: [Float]) async -> String? {
+        guard let url = URL(string: "http://127.0.0.1:8090/transcribe?partial=1") else { return nil }
+        var request = URLRequest(url: url, timeoutInterval: 5)
+        request.httpMethod = "POST"
+        request.setValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
+        request.httpBody = samples.withUnsafeBufferPointer { Data(buffer: $0) }
+        guard let (data, _) = try? await URLSession.shared.data(for: request),
+            let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+        else { return nil }
+        return (json["text"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private func finishRecording() async {
@@ -217,9 +258,9 @@ final class Dictation: ObservableObject {
         Self.log("son reçu : \(String(format: "%.1f", Double(samples.count) / 16000)) s, \(recorder.summary)")
         guard samples.count > 4000 else { return hide() }
         if Self.testMode { Self.saveWAV(samples) }
-        status = "Transcription…"
+        status = String(localized: "Transcribing…")
         guard let (raw, rejected) = await Self.transcribe(samples) else {
-            return flash("Dictée : le serveur de voix ne répond pas (web/dev.sh lancé ?).")
+            return flash(String(localized: "Dictation: the voice server isn't responding (is web/dev.sh running?)."))
         }
         if rejected {   // "N'écouter que ma voix": another voice, silently ignored
             Self.log("autre voix : ignorée")
@@ -228,6 +269,7 @@ final class Dictation: ObservableObject {
         Self.log("texte reconnu : « \(raw) »")
         guard !raw.isEmpty else { return hide() }
         text = raw
+        partial = false
         await insert(raw)
     }
 
@@ -284,8 +326,8 @@ final class Dictation: ObservableObject {
         if let meter { Self.log("son reçu : \(meter.summary)") }
         let raw = text.trimmingCharacters(in: .whitespacesAndNewlines)
         Self.log("texte reconnu : « \(raw) »")
-        guard !raw.isEmpty else {   // the "Active la Dictée" message stays shown (flash removes it itself)
-            if !status.hasPrefix("Active la Dictée") { hide() }
+        guard !raw.isEmpty else {   // the "Turn on Dictation" message stays shown (flash removes it itself)
+            if status != Self.enableDictationMessage { hide() }
             return
         }
         await insert(raw)
@@ -295,7 +337,7 @@ final class Dictation: ObservableObject {
     private func insert(_ raw: String) async {
         var final = raw
         if SettingsStore.dictation().cleanup {
-            status = "Mise au propre…"
+            status = String(localized: "Cleaning up…")
             final = await Self.cleanUp(raw) ?? raw
         }
         hide()
@@ -355,6 +397,11 @@ final class Dictation: ObservableObject {
         return content
     }
 
+    /// Shown when macOS Dictation is off (Apple's recognition needs it); stays until flash() hides it.
+    private static var enableDictationMessage: String {
+        String(localized: "Turn on Dictation: System Settings › Keyboard › Dictation. Nothing leaves your Mac.")
+    }
+
     private func flash(_ message: String) {
         Task { await pauseAssistantMic(false) }
         status = message
@@ -367,6 +414,7 @@ final class Dictation: ObservableObject {
     }
 
     private func show() {
+        belowIsland = assistantOpen()
         if panel == nil { panel = IslandPanel(rootView: DictationView(dictation: self)) }
         panel?.place(at: SettingsStore.islandPosition())
         panel?.orderFrontRegardless()
@@ -378,32 +426,51 @@ final class Dictation: ObservableObject {
     }
 }
 
-/// Black pill below the camera: mic and live text.
+/// The same black frame as voice commands and the assistant, coming out of the notch: mic and state on the first
+/// row (at notch height, camera in the middle), live text below, gray while provisional.
 struct DictationView: View {
     @ObservedObject var dictation: Dictation
 
+    private let notch = IslandView.notch
+
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 10) {
-                Image(systemName: dictation.listening ? "mic.fill" : "text.cursor")
-                    .foregroundStyle(dictation.listening ? .red : .white)
-                    .symbolEffect(.pulse, isActive: dictation.listening)
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 0) {
+                    Image(systemName: dictation.listening ? "mic.fill" : "text.cursor")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(dictation.listening ? .red : .white)
+                        .symbolEffect(.pulse, isActive: dictation.listening)
+                        .frame(width: 44, alignment: .leading)
+                    Spacer(minLength: notch.width)
+                    Label(dictation.listening ? "Listening" : "Dictation", systemImage: "text.cursor")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(dictation.listening ? Color.red : Color.white.opacity(0.75))
+                        .lineLimit(1)
+                }
+                .frame(height: belowIsland ? 28 : notch.height)
                 Text(dictation.text.isEmpty ? dictation.status : dictation.text)
                     .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(.white)
-                    .lineLimit(2)
+                    .foregroundStyle(dictation.partial ? Color.white.opacity(0.55) : .white)
+                    .lineLimit(3)
                     .truncationMode(.head)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .animation(.easeOut(duration: 0.15), value: dictation.text)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
-            .frame(width: 420)
-            .background(.black, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .padding(.top, 38)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 14)
+            .padding(.top, belowIsland ? 10 : 0)
+            .frame(width: IslandView.expandedWidth, alignment: .leading)
+            .background((belowIsland ? AnyShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                         : AnyShape(IslandShape(radius: 24))).fill(.black))
+            // Under an open conversation's island instead of on top of it.
+            .padding(.top, belowIsland ? 150 : 0)
             Spacer(minLength: 0)
         }
         .frame(width: IslandPanel.size.width, height: IslandPanel.size.height, alignment: .top)
     }
+
+    private var belowIsland: Bool { dictation.belowIsland }
 }
 
 /// Types text at the cursor of the frontmost app: clipboard + ⌘ V, then the previous clipboard is
@@ -526,6 +593,19 @@ final class Recorder: @unchecked Sendable {
         lock.lock()
         defer { lock.unlock() }
         return buffer
+    }
+
+    var count: Int {
+        lock.lock()
+        defer { lock.unlock() }
+        return buffer.count
+    }
+
+    /// The last `seconds` of audio, for the live text (a long dictation stays fast to re-transcribe).
+    func recent(seconds: Int) -> [Float] {
+        lock.lock()
+        defer { lock.unlock() }
+        return Array(buffer.suffix(seconds * 16000))
     }
 
     var summary: String {

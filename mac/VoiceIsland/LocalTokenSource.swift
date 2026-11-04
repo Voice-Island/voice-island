@@ -15,8 +15,8 @@ struct LocalTokenSource: TokenSourceFixed {
         case unreachable, noKeys
         var errorDescription: String? {
             switch self {
-            case .unreachable: "Serveur local injoignable. Lance ~/s2s-voice-assistant/web/dev.sh"
-            case .noKeys: "Clés LiveKit absentes (web/livekit.keys). Relance ~/s2s-voice-assistant/web/dev.sh"
+            case .unreachable: String(localized: "Can't reach the local server. Run ~/s2s-voice-assistant/web/dev.sh")
+            case .noKeys: String(localized: "LiveKit keys missing (web/livekit.keys). Run ~/s2s-voice-assistant/web/dev.sh again")
             }
         }
     }

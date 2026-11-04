@@ -41,7 +41,7 @@ final class VoicePrintStore: ObservableObject {
         let json = await Self.post("/enroll", samples)
         await refresh()
         if json?["ok"] as? Bool == true { return nil }
-        return json?["error"] as? String ?? "le serveur de voix ne répond pas (web/dev.sh lancé ?)"
+        return json?["error"] as? String ?? String(localized: "the voice server isn't responding (is web/dev.sh running?)")
     }
 
     /// -> (score, recognized); score is nil if there was no voice.
@@ -110,7 +110,7 @@ struct VoiceIDSection: View {
 
     var body: some View {
         Section {
-            Toggle("N'écouter que ma voix", isOn: Binding(
+            Toggle("Listen only to my voice", isOn: Binding(
                 get: { (settings.voiceId ?? .standard)[keyPath: product.keyPath] },
                 set: {
                     var value = settings.voiceId ?? .standard
@@ -120,12 +120,13 @@ struct VoiceIDSection: View {
             ))
             .disabled(!store.enrolled)
         } header: {
-            Text("Biométrie vocale")
+            Text("Voice biometrics")
         } footer: {
-            Text(store.enrolled
-                 ? "Une autre voix est ignorée en silence : ni transcrite, ni affichée. Empreinte, seuil et test : page « Ma voix ». "
-                   + "Ce n'est pas un verrou : un enregistrement de ta voix passerait."
-                 : "Enregistre d'abord ta voix dans la page « Ma voix ».")
+            if store.enrolled {
+                Text("Any other voice is silently ignored: never transcribed, never shown. Voiceprint, threshold and test: “My voice” page. This is not a lock: a recording of your voice would get through.")
+            } else {
+                Text("First record your voice on the “My voice” page.")
+            }
         }
         .task { await store.refresh() }
     }
@@ -138,12 +139,10 @@ struct MyVoicePage: View {
     @ObservedObject private var store = VoicePrintStore.shared
 
     private static let readings = [
-        "Bonjour, voici ma voix. J'utilise cet assistant tous les jours pour ouvrir mes applications, écrire mes "
-            + "messages et chercher des informations sur le web.",
+        String(localized: "Hi, this is my voice. I use this assistant every day to open my apps, write my messages and look things up on the web."),
         "Hello, this is my normal speaking voice. I use this assistant every day to open my apps, move my windows "
             + "around, search the web and play some music while I work.",
-        "Le matin, je commence par lire mes emails, puis je prépare mes présentations. Ensuite je passe des appels "
-            + "et je prends des notes pendant les réunions.",
+        String(localized: "In the morning, I start by reading my emails, then I prepare my presentations. After that I make calls and take notes during meetings."),
     ]
 
     @State private var recorder = VoiceRecorder()
@@ -158,10 +157,10 @@ struct MyVoicePage: View {
     var body: some View {
         Form {
             Section {
-                LabeledContent("Empreinte", value: !store.reachable ? "serveur de voix arrêté"
-                               : store.enrolled ? "enregistrée" : "aucune")
+                LabeledContent("Voiceprint", value: !store.reachable ? String(localized: "voice server stopped")
+                               : store.enrolled ? String(localized: "recorded") : String(localized: "none"))
                 if let step {
-                    Text("Lecture \(step + 1) sur \(Self.readings.count) : lis ce texte à voix normale.")
+                    Text("Reading \(step + 1) of \(Self.readings.count): read this text in your normal voice.")
                         .font(.callout.weight(.semibold))
                     Text(Self.readings[step])
                         .font(.title3)
@@ -169,7 +168,7 @@ struct MyVoicePage: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 8))
                     HStack {
-                        Button(recording ? "Arrêter" : "Commencer") { toggleReading() }
+                        Button(recording ? String(localized: "Stop") : String(localized: "Start")) { toggleReading() }
                             .buttonStyle(.borderedProminent)
                         if recording {
                             TimelineView(.periodic(from: startedAt, by: 0.5)) { context in
@@ -178,36 +177,36 @@ struct MyVoicePage: View {
                             }
                         }
                         Spacer()
-                        Button("Annuler") { cancelEnrollment() }
+                        Button("Cancel") { cancelEnrollment() }
                     }
                 } else {
-                    Button(store.enrolled ? "Refaire mon empreinte" : "Enregistrer ma voix") { beginEnrollment() }
+                    Button(store.enrolled ? String(localized: "Redo my voiceprint") : String(localized: "Record my voice")) { beginEnrollment() }
                         .disabled(!store.reachable || testing)
                 }
             } header: {
-                Text("Mon empreinte vocale")
+                Text("My voiceprint")
             } footer: {
-                Text("Trois lectures d'environ 15 s, avec le micro que tu utilises d'habitude. L'empreinte (256 nombres, "
-                     + "pas le son) reste sur ce Mac, dans le trousseau macOS ; les lectures ne sont pas gardées.")
+                Text("Three readings of about 15 s each, with the mic you usually use. The voiceprint (256 numbers, not the audio) stays on this Mac, in the macOS keychain; the readings are not kept.")
             }
 
             Section {
                 HStack {
-                    Button(testing ? "Arrêter et vérifier" : "Tester : dis une phrase") { toggleTest() }
+                    Button(testing ? String(localized: "Stop and check") : String(localized: "Test: say a sentence")) { toggleTest() }
                         .disabled(!store.enrolled || step != nil)
                     if !message.isEmpty { Text(message).foregroundStyle(.secondary) }
                 }
-                SliderRow("Seuil", value: Binding(
+                SliderRow(String(localized: "Threshold"), value: Binding(
                     get: { (settings.voiceId ?? .standard).threshold },
                     set: { var v = settings.voiceId ?? .standard; v.threshold = $0; settings.voiceId = v }
                 ), in: 0.2...0.7, step: 0.01, format: "%.2f",
-                          help: "Plus haut : les autres voix passent encore moins, mais tes mots très courts risquent d'être refusés. Mesures : ta voix ≥ 0,42, autres voix ≤ 0,36.")
+                          help: String(localized: "Higher: other voices get through even less, but your very short words may be rejected. Measured: your voice ≥ 0.42, other voices ≤ 0.36."))
             } header: {
-                Text("Tester et régler")
+                Text("Test and adjust")
             }
 
             Section {
-                ForEach([(VoiceProduct.dictation, "Dictée"), (.command, "Commandes vocales"), (.assistant, "Assistant vocal")],
+                ForEach([(VoiceProduct.dictation, String(localized: "Dictation")), (.command, String(localized: "Voice commands")),
+                         (.assistant, String(localized: "Voice assistant"))],
                         id: \.0.rawValue) { product, title in
                     Toggle(title, isOn: Binding(
                         get: { (settings.voiceId ?? .standard)[keyPath: product.keyPath] },
@@ -216,22 +215,20 @@ struct MyVoicePage: View {
                     .disabled(!store.enrolled)
                 }
             } header: {
-                Text("N'écouter que ma voix pour…")
+                Text("Listen only to my voice for…")
             } footer: {
-                Text("Une autre voix est ignorée en silence : elle n'est ni transcrite ni affichée. Un mot très court "
-                     + "(« Stop ») est accepté s'il suit de près une phrase reconnue. Ce n'est pas un verrou : un "
-                     + "enregistrement ou une imitation de ta voix peut passer.")
+                Text("Any other voice is silently ignored: it is neither transcribed nor shown. A very short word (“Stop”) is accepted if it closely follows a recognized sentence. This is not a lock: a recording or an imitation of your voice may get through.")
             }
 
             Section {
-                Button("Effacer mon empreinte", role: .destructive) { confirmErase = true }
+                Button("Erase my voiceprint", role: .destructive) { confirmErase = true }
                     .disabled(!store.enrolled)
             }
         }
         .formStyle(.grouped)
         .task { await store.refresh() }
-        .confirmationDialog("Effacer ton empreinte vocale ?", isPresented: $confirmErase) {
-            Button("Effacer", role: .destructive) {
+        .confirmationDialog("Erase your voiceprint?", isPresented: $confirmErase) {
+            Button("Erase", role: .destructive) {
                 Task {
                     await store.erase()
                     var v = settings.voiceId ?? .standard
@@ -239,18 +236,18 @@ struct MyVoicePage: View {
                     v.command = false
                     v.assistant = false
                     settings.voiceId = v
-                    message = "Empreinte effacée."
+                    message = String(localized: "Voiceprint erased.")
                 }
             }
         } message: {
-            Text("« N'écouter que ma voix » sera désactivé partout.")
+            Text("“Listen only to my voice” will be turned off everywhere.")
         }
     }
 
     private var voiceProcessing: Bool { controller.dictation.needsVoiceProcessing }
 
     private func beginEnrollment() {
-        guard !controller.isActive else { message = "Ferme d'abord la conversation en cours."; return }
+        guard !controller.isActive else { message = String(localized: "First close the current conversation."); return }
         clips = []
         message = ""
         step = 0
@@ -271,14 +268,14 @@ struct MyVoicePage: View {
                 startedAt = Date()
                 recording = true
             } catch {
-                message = "Micro indisponible : \(error.localizedDescription)"
+                message = String(localized: "Mic unavailable: \(error.localizedDescription)")
             }
             return
         }
         recording = false
         let samples = recorder.stop()
         guard samples.count > 16000 * 5 else {
-            message = "Lecture trop courte : recommence-la en entier."
+            message = String(localized: "Reading too short: start it again from the beginning.")
             return
         }
         clips.append(samples)
@@ -287,37 +284,39 @@ struct MyVoicePage: View {
             return
         }
         step = nil
-        message = "Calcul de l'empreinte…"
+        message = String(localized: "Computing the voiceprint…")
         let all = clips.flatMap { $0 }
         clips = []
         Task {
             let error = await store.enroll(all)
-            message = error.map { "Échec : \($0)" } ?? "Empreinte enregistrée. Active-la produit par produit ci-dessous."
+            message = error.map { String(localized: "Failed: \($0)") }
+                ?? String(localized: "Voiceprint recorded. Turn it on product by product below.")
         }
     }
 
     private func toggleTest() {
         if !testing {
-            guard !controller.isActive else { message = "Ferme d'abord la conversation en cours."; return }
+            guard !controller.isActive else { message = String(localized: "First close the current conversation."); return }
             do {
                 try recorder.start(voiceProcessing: voiceProcessing)
                 testing = true
-                message = "Parle…"
+                message = String(localized: "Speak…")
             } catch {
-                message = "Micro indisponible : \(error.localizedDescription)"
+                message = String(localized: "Mic unavailable: \(error.localizedDescription)")
             }
             return
         }
         testing = false
         let samples = recorder.stop()
-        message = "Vérification…"
+        message = String(localized: "Checking…")
         Task {
             guard let (score, accepted) = await store.score(samples) else {
-                message = "Le serveur de voix ne répond pas."
+                message = String(localized: "The voice server isn't responding.")
                 return
             }
-            guard let score else { message = "Pas de voix entendue."; return }
-            message = String(format: "%.2f : ", score) + (accepted ? "c'est bien toi ✓" : "voix non reconnue ✗")
+            guard let score else { message = String(localized: "No voice heard."); return }
+            let value = String(format: "%.2f", score)
+            message = accepted ? String(localized: "\(value): that's you ✓") : String(localized: "\(value): voice not recognized ✗")
         }
     }
 }

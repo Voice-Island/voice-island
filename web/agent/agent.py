@@ -528,7 +528,7 @@ class Assistant(Agent):
                 yield c
             return
         logger.warning("toujours sans outil : %s -> réponse honnête", r(said))
-        await publish_action(f"Elle allait dire « {said[:70]} » sans rien faire : rien n'a été lancé.", ok=False)
+        await publish_action(f"It was about to say “{said[:70]}” without doing anything: nothing was run.", ok=False)
         yield HONEST_FALLBACK
 
 
