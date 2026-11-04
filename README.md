@@ -1,6 +1,22 @@
 # Voice Island
 
-**Website: [voice-island.vercel.app](https://voice-island.vercel.app)**
+**You speak. It types. It acts. It answers.** Free, open source, and running entirely on your Mac.
+
+<p align="center">
+  <a href="https://voice-island.vercel.app">
+    <img src="docs/demo.gif" width="900" alt="Animated mock-up of Voice Island: dictation with live text into an e-mail, a voice command that moves Chrome to the left half and opens a Terminal window, and a spoken answer about the afternoon's calendar">
+  </a>
+  <br>
+  <sub>Animated mock-up of the three products. A screen recording is coming.</sub>
+</p>
+
+<p align="center">
+  <a href="#install"><b>Install</b></a> ·
+  <a href="https://voice-island.vercel.app">Website</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#privacy-and-security">Privacy</a> ·
+  <a href="#license">License</a>
+</p>
 
 A voice assistant that runs **entirely on your Mac**: speech recognition, language model and voice, with no
 cloud service. It is three products in one menu-bar app:
