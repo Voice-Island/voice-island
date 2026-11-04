@@ -1,0 +1,169 @@
+<!doctype html>
+<!-- Synthetic test screens for web/test/vision_eval.py (no real screenshots: no private data).
+     screens.html?case=<name> draws a plausible Mac screen; render.mjs turns them into 2880x1800 PNGs (Retina). -->
+<html><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1440px; height: 900px; overflow: hidden; font: 13px -apple-system, "SF Pro Text", "Helvetica Neue", sans-serif;
+         background: linear-gradient(135deg, #3a6186, #89253e); color: #1d1d1f; }
+  .menubar { height: 25px; background: rgba(240,240,240,.85); display: flex; align-items: center; gap: 18px; padding: 0 14px;
+             font-size: 13px; }
+  .menubar b { font-weight: 600; } .menubar .right { margin-left: auto; }
+  .win { position: absolute; top: 40px; left: 60px; width: 1320px; height: 830px; background: #fff; border-radius: 10px;
+         overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.45); display: flex; flex-direction: column; }
+  .title { height: 38px; background: #ececec; border-bottom: 1px solid #d0d0d0; display: flex; align-items: center; padding: 0 14px;
+           gap: 8px; flex: none; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; } .r { background: #ff5f57; } .y { background: #febc2e; } .g { background: #28c840; }
+  .title .name { margin: 0 auto; color: #555; font-weight: 500; }
+  .body { flex: 1; position: relative; overflow: hidden; }
+  .dark { background: #1e1e1e; color: #d4d4d4; } .dark .title { background: #2d2d2d; border-color: #111; } .dark .title .name { color: #aaa; }
+  pre { font: 14px/22px Menlo, monospace; }
+</style></head>
+<body><div id="root"></div>
+<script>
+const menu = (app, items) => `<div class="menubar"><b>${app}</b>${items.map(i => `<span>${i}</span>`).join("")}<span class="right">Mon 2 Nov 14:07</span></div>`;
+const win = (name, inner, cls = "") => `<div class="win ${cls}"><div class="title"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="name">${name}</span></div><div class="body">${inner}</div></div>`;
+
+const S = {};
+
+S.code = () => menu("Code", ["File", "Edit", "Selection", "View", "Go", "Run", "Terminal", "Help"]) + win("assistant.py — voice-island", `
+  <div style="display:flex;height:100%">
+   <div style="width:220px;background:#252526;padding:10px;font-size:13px;color:#ccc;line-height:24px">EXPLORER<br>▾ VOICE-ISLAND<br>&nbsp;&nbsp;agent.py<br>&nbsp;&nbsp;<span style="background:#37373d">assistant.py</span><br>&nbsp;&nbsp;tools.py<br>&nbsp;&nbsp;settings.py</div>
+   <div style="flex:1;display:flex;flex-direction:column">
+    <pre style="flex:1;padding:12px 16px;color:#d4d4d4"><span style="color:#858585"> 1</span>  <span style="color:#c586c0">import</span> json
+<span style="color:#858585"> 2</span>  <span style="color:#c586c0">from</span> llm <span style="color:#c586c0">import</span> ask
+<span style="color:#858585"> 3</span>
+<span style="color:#858585"> 4</span>
+<span style="color:#858585"> 5</span>  <span style="color:#569cd6">def</span> <span style="color:#dcdcaa">answer</span>(question: <span style="color:#4ec9b0">str</span>) -> <span style="color:#4ec9b0">str</span>:
+<span style="color:#858585"> 6</span>      <span style="color:#6a9955">"""Ask the model and return the spoken text."""</span>
+<span style="color:#858585"> 7</span>      prompt = <span style="color:#ce9178">f"Answer briefly: {question}"</span>
+<span style="color:#858585"> 8</span>      raw = ask(prompt, max_tokens=<span style="color:#b5cea8">200</span>)
+<span style="color:#858585"> 9</span>      data = json.loads(raw)
+<span style="color:#858585">10</span>      <span style="color:#c586c0">if</span> <span style="color:#569cd6">not</span> data.get(<span style="color:#ce9178">"text"</span>):
+<span style="color:#858585">11</span>          <span style="color:#c586c0">return</span> <span style="color:#ce9178">"Sorry, I didn't get that."</span>
+<span style="color:#858585">12</span>      response = data[<span style="color:#ce9178">"text"</span>].strip()
+<span style="color:#858585">13</span>
+<span style="color:#858585">14</span>      <span style="color:#c586c0">return</span> <span style="text-decoration:underline wavy #f14c4c">reponse</span>
+</pre>
+    <div style="height:150px;border-top:1px solid #444;background:#1e1e1e;padding:8px 16px;font-size:13px;line-height:22px">
+     <div style="color:#fff">PROBLEMS <span style="background:#f14c4c;border-radius:8px;padding:0 6px;color:#fff">1</span> &nbsp; OUTPUT &nbsp; TERMINAL</div>
+     <div><span style="color:#f14c4c">⊗</span> "reponse" is not defined &nbsp;<span style="color:#888">Pylance(reportUndefinedVariable) [Ln 14, Col 12]</span></div>
+    </div>
+   </div>
+  </div>`, "dark");
+
+S.terminal = () => menu("Terminal", ["Shell", "Edit", "View", "Window", "Help"]) + win("site — zsh — 120×36", `
+  <pre style="padding:14px;color:#e6e6e6">alex@MacBook-Air site % npm run build
+
+> site@0.4.0 build
+> vite build
+
+<span style="color:#7fd3ff">vite v6.2.1</span> building for production...
+transforming (14) src/main.jsx
+<span style="color:#ff6b6b">✗ Build failed in 812ms
+error during build:
+Error: Cannot find module 'react-dom/client'
+Require stack:
+- /Users/alex/site/src/main.jsx
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1145:15)
+    at Module._load (node:internal/modules/cjs/loader:986:27)</span>
+alex@MacBook-Air site % █</pre>`, "dark");
+
+S.email = () => menu("Google Chrome", ["File", "Edit", "View", "History", "Bookmarks", "Profiles", "Tab", "Window", "Help"]) + win("Inbox (3) — mail.google.com", `
+  <div style="display:flex;height:100%">
+   <div style="width:230px;background:#f6f8fc;padding:16px;line-height:34px;font-size:14px"><div style="background:#c2e7ff;border-radius:16px;padding:12px 18px;margin-bottom:10px">✎ Compose</div><b>Inbox</b> 3<br>Starred<br>Snoozed<br>Sent<br>Drafts</div>
+   <div style="flex:1;padding:24px 32px">
+    <div style="font-size:22px;margin-bottom:18px">Déplacer notre réunion ?</div>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:22px"><div style="width:40px;height:40px;border-radius:50%;background:#7b5ea7;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px">C</div>
+     <div><b>Claire Martin</b> <span style="color:#666">&lt;claire.martin@atelier-nord.example&gt;</span><br><span style="color:#666">to me · 11:42</span></div></div>
+    <div style="font-size:15px;line-height:24px;max-width:760px">Bonjour,<br><br>Un imprévu de mon côté : est-ce qu'on peut déplacer notre point de mardi à <b>jeudi 15h</b> ? Même lien visio.<br>Dis-moi si ça te va.<br><br>Merci,<br>Claire</div>
+    <div style="margin-top:30px;display:flex;gap:10px"><span style="border:1px solid #999;border-radius:18px;padding:8px 18px">↩ Reply</span><span style="border:1px solid #999;border-radius:18px;padding:8px 18px">↪ Forward</span></div>
+   </div>
+  </div>`);
+
+S.chart = () => {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"], v = [42, 55, 48, 91, 63, 70];
+  const bars = v.map((x, i) => `<rect x="${110 + i * 150}" y="${560 - x * 5}" width="90" height="${x * 5}" fill="#4a7bd0"/><text x="${155 + i * 150}" y="590" text-anchor="middle" font-size="18">${months[i]}</text>`).join("");
+  return menu("Numbers", ["File", "Edit", "Insert", "Table", "Chart", "Format", "Arrange", "View", "Window", "Help"]) + win("Sales 2026.numbers", `
+   <svg width="1320" height="790"><text x="660" y="60" text-anchor="middle" font-size="26" font-weight="600">Monthly sales 2026</text>
+    <line x1="90" y1="560" x2="1030" y2="560" stroke="#333"/><line x1="90" y1="80" x2="90" y2="560" stroke="#333"/>
+    ${[0, 25, 50, 75, 100].map(t => `<line x1="90" x2="1030" y1="${560 - t * 4.8}" y2="${560 - t * 4.8}" stroke="#eee"/>`).join("")}${bars}</svg>`);
+};
+
+S.dialog = () => menu("Finder", ["File", "Edit", "View", "Go", "Window", "Help"]) + `
+  <div style="position:absolute;top:120px;left:80px;color:#fff;font-size:12px;text-align:center;width:90px"><div style="width:64px;height:64px;margin:0 auto 6px;background:#d9d9d9;border-radius:8px"></div>Installer.pkg</div>
+  <div style="position:absolute;top:260px;left:590px;width:260px;background:#ececec;border-radius:12px;padding:22px 18px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)">
+   <div style="width:56px;height:56px;margin:0 auto 12px;border-radius:12px;background:#f5c542;font-size:34px;line-height:56px">⚠︎</div>
+   <div style="font-weight:700;font-size:13px;margin-bottom:8px">“Installer.pkg” Not Opened</div>
+   <div style="font-size:11px;line-height:15px;margin-bottom:16px">Apple could not verify “Installer.pkg” is free of malware that may harm your Mac or compromise your privacy.</div>
+   <div style="background:#d0d0d0;border-radius:6px;padding:5px;margin-bottom:6px">Done</div><div style="background:#d0d0d0;border-radius:6px;padding:5px">Move to Trash</div>
+  </div>`;
+
+S.youtube = () => {
+  const t = [["Lo-fi beats to code to", "#5b4b8a"], ["How black holes really work", "#111"], ["Make fresh pasta like a pro", "#d98b3a"],
+             ["10 macOS tricks you missed", "#3a8fd9"], ["Lisbon in 4K — walking tour", "#2f8f5b"], ["Beginner guitar: first song", "#a33"]];
+  return menu("Google Chrome", ["File", "Edit", "View", "History", "Bookmarks", "Profiles", "Tab", "Window", "Help"]) + win("YouTube", `
+   <div style="height:56px;display:flex;align-items:center;padding:0 24px;gap:24px;border-bottom:1px solid #eee"><b style="color:#f00;font-size:20px">▶ YouTube</b><div style="flex:1;max-width:560px;border:1px solid #ccc;border-radius:20px;padding:8px 16px;color:#888">Search</div></div>
+   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px 22px;padding:24px">
+    ${t.map(([n, c]) => `<div><div style="height:220px;border-radius:12px;background:${c}"></div><div style="font-weight:600;font-size:15px;margin-top:10px">${n}</div><div style="color:#666;font-size:13px">1.2M views · 3 days ago</div></div>`).join("")}
+   </div>`);
+};
+
+S.save_button = () => menu("Voice Island", ["File", "Edit", "View", "Window", "Help"]) + win("Preferences", `
+  <div style="padding:40px 60px;font-size:15px;line-height:20px">
+   <div style="font-size:22px;font-weight:600;margin-bottom:30px">Account</div>
+   ${["Display name", "Email", "Language", "Time zone"].map((l, i) => `<div style="display:flex;align-items:center;margin-bottom:22px"><div style="width:180px;color:#555">${l}</div><div style="width:420px;border:1px solid #ccc;border-radius:6px;padding:8px 10px">${["Alex", "alex@example.com", "English", "Europe/Paris"][i]}</div></div>`).join("")}
+   <div style="display:flex;align-items:center;margin-bottom:22px"><div style="width:180px;color:#555">Notifications</div><input type="checkbox" checked> &nbsp;Send me a weekly summary</div>
+  </div>
+  <div style="position:absolute;right:30px;bottom:26px;display:flex;gap:12px"><span style="border:1px solid #bbb;border-radius:6px;padding:8px 18px">Cancel</span><span style="background:#0a84ff;color:#fff;border-radius:6px;padding:8px 18px">Save changes</span></div>`);
+
+S.status = () => {
+  const s = [["LiveKit", "Running", "#28c840"], ["Language model", "Running", "#28c840"], ["Voice server", "Offline", "#ff3b30"], ["Agent", "Running", "#28c840"], ["Web interface", "Running", "#28c840"]];
+  return menu("Voice Island", ["File", "Edit", "View", "Window", "Help"]) + win("Dashboard — Services", `
+   <div style="padding:36px 50px"><div style="font-size:24px;font-weight:600;margin-bottom:28px">Services</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+     ${s.map(([n, st, c]) => `<div style="border:1px solid #ddd;border-radius:12px;padding:22px"><div style="font-size:17px;font-weight:600;margin-bottom:10px">${n}</div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${c}"></span> <span style="color:#555">${st}</span></div>`).join("")}
+    </div></div>`);
+};
+
+S.photo = () => menu("Preview", ["File", "Edit", "View", "Go", "Tools", "Window", "Help"]) + win("IMG_2041.HEIC", `
+  <svg width="1320" height="792" viewBox="0 0 1320 792"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7b267"/><stop offset="1" stop-color="#f4845f"/></linearGradient></defs>
+   <rect width="1320" height="792" fill="url(#sky)"/><circle cx="980" cy="230" r="80" fill="#ffe29a"/>
+   <polygon points="0,470 260,200 480,470" fill="#6d597a"/><polygon points="330,470 620,150 900,470" fill="#584b6b"/><polygon points="760,470 1060,250 1320,470" fill="#6d597a"/>
+   <rect y="470" width="1320" height="322" fill="#3d6b8f"/>
+   <g transform="translate(560,560)"><polygon points="0,0 160,0 130,40 30,40" fill="#7a3b2e"/><line x1="80" y1="0" x2="80" y2="-170" stroke="#333" stroke-width="5"/><polygon points="85,-165 85,-10 170,-10" fill="#d62828"/><polygon points="75,-150 75,-10 15,-10" fill="#f1faee"/></g>
+  </svg>`);
+
+S.french = () => menu("Safari", ["Fichier", "Édition", "Présentation", "Historique", "Signets", "Fenêtre", "Aide"]) + win("Transports — lequotidien.fr", `
+  <div style="max-width:820px;margin:0 auto;padding:40px 20px;font-family:Georgia,serif">
+   <div style="color:#b00;font:600 13px -apple-system;letter-spacing:.08em;margin-bottom:12px">TRANSPORTS</div>
+   <div style="font-size:38px;line-height:46px;font-weight:700;margin-bottom:18px">La SNCF annonce un TGV direct entre Lyon et Turin dès l'été 2027</div>
+   <div style="font-size:19px;line-height:30px;color:#333;margin-bottom:18px">Le trajet passera de 4 h 10 à 2 h 50 grâce au nouveau tunnel. Quatre allers-retours par jour sont prévus, avec des billets dès 29 euros.</div>
+   <div style="font:13px -apple-system;color:#777;margin-bottom:20px">Publié le 2 novembre 2026 à 08 h 15</div>
+   <div style="font-size:17px;line-height:28px">Les travaux de la ligne, commencés il y a plus de dix ans, entrent dans leur dernière phase. Les élus de la région se félicitent d'une liaison attendue par les entreprises comme par les étudiants…</div>
+  </div>`);
+
+S.sheet = () => {
+  const rows = [["Office rent", "Oct", "3 200 €"], ["Laptops (2)", "Oct", "4 380 €"], ["Software licences", "Oct", "1 150 €"], ["Travel", "Oct", "2 090 €"], ["Coffee & snacks", "Oct", "310 €"], ["Internet", "Oct", "95 €"], ["Insurance", "Oct", "1 255 €"]];
+  const cell = "border:1px solid #e0e0e0;padding:3px 8px;font-size:11px";
+  return menu("Numbers", ["File", "Edit", "Insert", "Table", "Organize", "Format", "Arrange", "View", "Window", "Help"]) + win("Expenses Q4.numbers", `
+   <div style="padding:30px"><div style="font-size:15px;font-weight:600;margin-bottom:10px">October expenses</div>
+    <table style="border-collapse:collapse"><tr>${["Item", "Month", "Amount"].map(h => `<th style="${cell};background:#f2f2f2;width:180px;text-align:left">${h}</th>`).join("")}</tr>
+     ${rows.map(r => `<tr>${r.map(c => `<td style="${cell}">${c}</td>`).join("")}</tr>`).join("")}
+     <tr><td style="${cell};font-weight:700">Total</td><td style="${cell}"></td><td style="${cell};font-weight:700">12 480 €</td></tr></table></div>`);
+};
+
+S.calendar = () => {
+  const days = ["Mon 2", "Tue 3", "Wed 4", "Thu 5", "Fri 6"];
+  const ev = { 0: [[9, 1, "Standup", "#5b8def"]], 1: [[11, 1, "Gym", "#34c759"]], 2: [[10, 1, "Dentist", "#ff9f0a"], [14.5, 1, "Call with Marc — budget", "#5b8def"]], 3: [[16, 1.5, "Design review", "#af52de"]], 4: [[12, 1, "Lunch with Sara", "#34c759"]] };
+  const hour = 52, top0 = 8;
+  return menu("Calendar", ["File", "Edit", "View", "Window", "Help"]) + win("Calendar — Week 45", `
+   <div style="display:flex;height:100%"><div style="width:60px;padding-top:40px;color:#888;font-size:11px">${Array.from({ length: 13 }, (_, i) => `<div style="height:${hour}px">${top0 + i}:00</div>`).join("")}</div>
+    ${days.map((d, i) => `<div style="flex:1;border-left:1px solid #eee;position:relative"><div style="height:40px;text-align:center;font-weight:600;line-height:40px">${d}</div>
+      ${(ev[i] || []).map(([h, len, n, c]) => `<div style="position:absolute;left:6px;right:6px;top:${40 + (h - top0) * hour}px;height:${len * hour - 4}px;background:${c}33;border-left:3px solid ${c};border-radius:4px;padding:4px 6px;font-size:12px"><b>${n}</b><br>${Math.floor(h)}:${h % 1 ? "30" : "00"}</div>`).join("")}</div>`).join("")}</div>`);
+};
+
+const name = new URLSearchParams(location.search).get("case");
+document.getElementById("root").innerHTML = (S[name] || (() => "unknown case"))();
+window.CASES = Object.keys(S);
+</script></body></html>

@@ -1,0 +1,26 @@
+[project]
+name = "voice-agent"
+version = "0.1.0"
+description = "Local voice assistant agent: Moonshine STT, Qwen3 via MLX, Kokoro / Qwen3-TTS, LiveKit Agents"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "kaldi-native-fbank>=1.22.5",
+    "livekit-agents[mcp]==1.8.8",
+    "livekit-plugins-openai==1.8.8",
+    "livekit-plugins-silero==1.8.8",
+    "livekit-plugins-turn-detector==1.8.8",
+    "misaki[en]>=0.9.4",
+    "mlx-audio>=0.6.1",
+    "mlx-lm>=0.32.2",
+    "moonshine-voice>=0.1.5",
+    "python-dotenv>=1.2.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

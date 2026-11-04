@@ -1,0 +1,12 @@
+// Default signing: ad hoc (enough to run the app on your own Mac).
+// macOS then asks for permissions again (microphone, Chrome, Accessibility) after every build.
+// To keep them, create Config/Local.xcconfig (not versioned), for example:
+//   CODE_SIGN_IDENTITY = Apple Development
+//   DEVELOPMENT_TEAM = <your team ID>
+//   PRODUCT_BUNDLE_IDENTIFIER = com.example.voiceisland
+CODE_SIGN_STYLE = Manual
+CODE_SIGN_IDENTITY = -
+DEVELOPMENT_TEAM =
+PRODUCT_BUNDLE_IDENTIFIER = dev.voiceisland.app
+
+#include? "Local.xcconfig"

@@ -1,0 +1,69 @@
+Voice Island
+Copyright 2026 Abdullah Ghazlani
+
+This product is licensed under the GNU Affero General Public License, version 3 (see LICENSE), or under a
+commercial license from the copyright holder (see COMMERCIAL.md). Third-party components below keep their own
+licenses; a commercial license covers this project's own code only.
+
+It is built on the following open models and libraries, each under its own license. Model weights are
+downloaded at runtime (Hugging Face, or download.moonshine.ai for Moonshine) and are not part of this
+repository.
+
+Models used by default
+- Qwen3-4B-Instruct-2507 (language model), Qwen team, Alibaba Cloud. Apache License 2.0.
+  Downloaded as mlx-community/Qwen3-4B-Instruct-2507-4bit. https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507
+- Kokoro-82M (voice), hexgrad. Apache License 2.0. https://huggingface.co/hexgrad/Kokoro-82M
+  Downloaded as the MLX conversion prince-canuma/Kokoro-82M.
+- Moonshine streaming, English (speech recognition), Moonshine AI / Useful Sensors. MIT License for the English
+  models, downloaded from download.moonshine.ai. Moonshine models for other languages are under the
+  non-commercial Moonshine Community License and are not used.
+- Parakeet TDT 0.6B v3 (dictation, commands and chat), NVIDIA. Creative Commons Attribution 4.0 (CC-BY-4.0).
+  https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3 ; used as the MLX conversion
+  mlx-community/parakeet-tdt-0.6b-v3 (converted to MLX; weights cast to bfloat16 at load time).
+- Silero VAD (voice activity detection), Silero Team. MIT License. https://github.com/snakers4/silero-vad
+- spaCy en_core_web_sm (used by misaki for English text-to-phonemes), Explosion. MIT License.
+- LiveKit turn detector (end-of-turn model, livekit/turn-detector v1.2.2-en), LiveKit, Inc. LiveKit Model
+  License: free and usable commercially, but only together with the LiveKit Agents framework, not to develop
+  other models, and redistribution only under the same terms with its notice. Not an OSI license, not
+  redistributed here (LiveKit Agents downloads it). https://huggingface.co/livekit/turn-detector
+- livekit-local-inference (installed with LiveKit Agents 1.8): Apache License 2.0 code with an embedded model
+  under the LiveKit Model License (above).
+
+Models used on demand or optional
+- WeSpeaker ResNet34-LM (speaker verification, "listen only to my voice", off by default), Wespeaker project.
+  Creative Commons Attribution 4.0 (CC-BY-4.0). https://huggingface.co/Wespeaker/wespeaker-voxceleb-resnet34-LM
+  Features computed with kaldi-native-fbank (Apache License 2.0).
+- Whisper large-v3-turbo (dictation fallback when Parakeet picks the wrong language), OpenAI. MIT License.
+  Used as mlx-community/whisper-large-v3-turbo-8bit (converted to MLX) with openai/whisper-large-v3-turbo's
+  processor files.
+- Qwen3-TTS 0.6B / 1.7B CustomVoice (expressive voices), Qwen team, Alibaba Cloud. Apache License 2.0.
+  Used as mlx-community/Qwen3-TTS-12Hz-0.6B-CustomVoice-8bit and -1.7B-CustomVoice-8bit.
+- Chatterbox Turbo (voice), Resemble AI. MIT License. Used as mlx-community/chatterbox-turbo-8bit.
+- Language models selectable in the settings, under their own licenses:
+  Apache License 2.0: Qwen2.5 0.5B / 1.5B / 7B Instruct, Qwen3 4B, Qwen3.5 2B / 4B, MiniCPM5 2B (OpenBMB).
+  Restricted: Qwen2.5-3B-Instruct (Qwen Research License, no commercial use); LFM2.5-1.2B (Liquid AI, LFM Open
+  License v1.0, commercial use limited above a revenue threshold); Llama 3.2 1B / 3B (Meta, Llama 3.2 Community
+  License, "Built with Llama"); Gemma 3 1B / 4B (Google, Gemma Terms of Use).
+
+Libraries
+- LiveKit Agents (Python), LiveKit Swift SDK, livekit-server, LiveKit, Inc. Apache License 2.0.
+  The Swift SDK ships LiveKitWebRTC (WebRTC, BSD 3-Clause, with its bundled third-party notices) and
+  RustLiveKitUniFFI (Apache License 2.0).
+- MLX, MLX LM and MLX Audio, Apple and contributors. MIT License.
+- MLX-VLM (vision server, web/vision, optional), Prince Canuma and contributors. MIT License. Serves
+  mlx-community/Qwen3.5-2B-MLX-8bit (Qwen3.5 2B, Apache License 2.0) to look at the screen.
+- misaki (Kokoro text-to-phonemes), hexgrad. Apache License 2.0.
+- MCP Python SDK (MIT License), OpenAI Python SDK (Apache License 2.0).
+- KeyboardShortcuts, Sindre Sorhus. MIT License.
+- web/frontend is derived from LiveKit's agent-starter-react, MIT License, Copyright (c) 2025 LiveKit, Inc.
+  (see web/frontend/LICENSE). Its Commit Mono fonts (web/frontend/fonts), Copyright 2023 Commit Mono authors, are under the SIL
+  Open Font License 1.1 (text in web/frontend/fonts/OFL.txt).
+
+GPL / LGPL notice
+These components are installed as separate dependencies and are not part of this repository. Anyone
+distributing a packaged binary that bundles them must comply with their licenses:
+- misaki's English pipeline falls back to espeak-ng (GPL-3.0-or-later) through phonemizer-fork
+  (GPL-3.0-or-later); espeakng-loader bundles the libespeak-ng library.
+- num2words (LGPL).
+- PyAV (installed by LiveKit Agents) bundles FFmpeg (LGPL-3.0-or-later) built with libx264 and libx265
+  (GPL-2.0-or-later).

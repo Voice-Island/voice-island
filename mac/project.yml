@@ -1,0 +1,44 @@
+name: VoiceIsland
+options:
+  deploymentTarget:
+    macOS: "14.0"
+packages:
+  LiveKit:
+    url: https://github.com/livekit/client-sdk-swift
+    from: 2.18.0
+  KeyboardShortcuts:
+    url: https://github.com/sindresorhus/KeyboardShortcuts
+    from: 2.0.0
+targets:
+  VoiceIsland:
+    type: application
+    platform: macOS
+    sources: [VoiceIsland]
+    info:
+      path: VoiceIsland/Info.plist
+      properties:
+        CFBundleDisplayName: Voice Island
+        # Menu bar app: no Dock icon.
+        LSUIElement: true
+        NSMicrophoneUsageDescription: L'assistant écoute ta voix quand tu l'actives avec le raccourci clavier.
+        NSSpeechRecognitionUsageDescription: La dictée transcrit ta voix sur le Mac, sans rien envoyer.
+        NSCalendarsFullAccessUsageDescription: L'assistant lit et ajoute des rendez-vous quand tu le demandes ; déplacer ou supprimer demande ta confirmation.
+        NSRemindersFullAccessUsageDescription: L'assistant ajoute les rappels que tu lui demandes.
+        # The repo's web/ folder, to read the settings and launch dev.sh without a hard-coded path.
+        VoiceIslandWebDir: $(SRCROOT)/../web
+        NSAppleEventsUsageDescription: L'assistant lit l'onglet Chrome affiché et y ouvre YouTube quand tu le lui demandes.
+    # Signing and bundle ID: Config/Base.xcconfig (ad hoc by default), overridden by Config/Local.xcconfig
+    # (not versioned) to sign with your own certificate.
+    configFiles:
+      Debug: Config/Base.xcconfig
+      Release: Config/Base.xcconfig
+    settings:
+      base:
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: NO
+        ENABLE_HARDENED_RUNTIME: NO
+    dependencies:
+      - package: LiveKit
+        product: LiveKit
+      - package: KeyboardShortcuts
+        product: KeyboardShortcuts
